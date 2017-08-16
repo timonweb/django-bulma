@@ -1,0 +1,9 @@
+{% extends 'site_base.html' %}
+{% block content_area %}
+  <div class="columns is-desktop">
+    <div class="column is-6 is-offset-3">
+      {% block content_title %}{% endblock content_title %}
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+{% endblock content_area %}

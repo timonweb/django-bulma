@@ -1,0 +1,4 @@
+{{ formset.management_form }}
+{% for form in formset %}
+  {% include "bulma/forms/form.html" with form=form %}
+{% endfor %}

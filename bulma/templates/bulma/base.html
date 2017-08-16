@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock title %}</title>
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+  {% endblock css %}
+</head>
+<body>
+
+{% block header %}
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"
+               width="112" height="28">
+        </a>
+
+        <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+        <span class="icon" style="color: #333;">
+          <i class="fa fa-github"></i>
+        </span>
+        </a>
+
+        <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+        <span class="icon" style="color: #55acee;">
+          <i class="fa fa-twitter"></i>
+        </span>
+        </a>
+
+        <div class="navbar-burger burger" data-target="navMenuExample">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="navMenuExample" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link  is-active" href="/documentation/overview/start/">
+              Docs
+            </a>
+            <div class="navbar-dropdown ">
+              <a class="navbar-item " href="/documentation/overview/start/">
+                Overview
+              </a>
+              <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+                Modifiers
+              </a>
+              <a class="navbar-item " href="http://bulma.io/documentation/grid/columns/">
+                Grid
+              </a>
+              <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+                Layout
+              </a>
+              <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
+                Form
+              </a>
+              <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
+                Elements
+              </a>
+              <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+                Components
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-link">
+              More
+            </div>
+            <div id="moreDropdown" class="navbar-dropdown ">
+              <a class="navbar-item " href="http://bulma.io/extensions/">
+                <div class="level is-mobile">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <p>
+                        <strong>Extensions</strong>
+                        <br>
+                        <small>Side projects to enhance Bulma</small>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                    <span class="icon has-text-info">
+                      <i class="fa fa-plug"></i>
+                    </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+            Github
+          </a>
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.0.zip">
+                <span class="icon">
+                  <i class="fa fa-download"></i>
+                </span>
+                  <span>Download</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+{% endblock header %}
+
+{% block hero %}{% endblock hero %}
+
+<section class="section">
+  <div class="container">
+    {% block messages %}
+      {% if messages %}
+        <div class="messages columns is-desktop">
+          <div class="column is-4 is-offset-4">
+            {% for message in messages %}
+              <div class="message {% if message.tags %}is-{{ message.tags }}{% endif %}">
+                <div class="message-body">{{ message }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock messages %}
+
+    {% block content_area %}
+      {% block content_title %}{% endblock content_title %}
+      {% block content %}{% endblock content %}
+    {% endblock content_area %}
+
+  </div>
+</section>
+
+{% block modal %}{% endblock modal %}
+
+{% block footer %}
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. <strong>Django-Bulma</strong> by <a
+            href="http://timonweb.com">Tim Kamanin</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. Build nicely.
+        </p>
+        <p>
+          <a class="icon" href="https://github.com/jgthms/bulma">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+{% endblock footer %}
+
+{% block javascript %}
+  {% block extra_javascript %}{% endblock extra_javascript %}
+{% endblock javascript %}
+</body>
+</html>

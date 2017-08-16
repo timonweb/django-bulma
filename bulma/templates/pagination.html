@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% if is_paginated %}
+  <nav class="pagination is-centered">
+    {% if page_obj.has_previous %}
+      <a class="pagination-previous" href="?page=
+          {{ page_obj.previous_page_number|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{% trans "Previous" %}</a>
+    {% else %}
+      <a disabled>{% trans "Previous" %}</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+      <a class="pagination-next"
+         href="?page={{ page_obj.next_page_number|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{% trans "Next" %}</a>
+    {% else %}
+      <a disabled>{% trans "Next" %}</a>
+    {% endif %}
+
+    <ul class="pagination-list">
+      {% for page in paginator.page_range %}
+        <li><a class="{% ifequal page page_obj.number %}pagination-link is-current{% endifequal %}"
+               href="?page={{ page|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{{ page|stringformat:"d" }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
