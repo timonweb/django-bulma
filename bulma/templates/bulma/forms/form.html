@@ -1,9 +1,13 @@
 {% if form.non_field_errors %}
-  <div class="alert alert-danger">
-    <a class="close" data-dismiss="alert">&times;</a>
-    {% for non_field_error in form.non_field_errors %}
-      {{ non_field_error }}
-    {% endfor %}
+  <div class="message is-danger">
+    <div class="message-header">
+      <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      {% for non_field_error in form.non_field_errors %}
+        {{ non_field_error }}
+      {% endfor %}
+    </div>
   </div>
 {% endif %}
 

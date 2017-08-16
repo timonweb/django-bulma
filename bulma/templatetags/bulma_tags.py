@@ -5,7 +5,7 @@ from django import template
 
 register = template.Library()
 
-BOOTSTRAP_COLUMN_COUNT = 1
+BULMA_COLUMN_COUNT = 1
 
 @register.filter
 def bulma(element):
@@ -20,7 +20,7 @@ def bulma_inline(element):
 
 
 @register.filter
-def bulma_horizontal(element, label_cols='col-sm-2 col-lg-2'):
+def bulma_horizontal(element, label_cols='is-2'):
 
     markup_classes = {'label': label_cols, 'value': '', 'single_value': ''}
 
@@ -30,14 +30,14 @@ def bulma_horizontal(element, label_cols='col-sm-2 col-lg-2'):
         try:
             value_nb_cols = int(splitted_class[-1])
         except ValueError:
-            value_nb_cols = BOOTSTRAP_COLUMN_COUNT
+            value_nb_cols = BULMA_COLUMN_COUNT
 
-        if value_nb_cols >= BOOTSTRAP_COLUMN_COUNT:
-            splitted_class[-1] = BOOTSTRAP_COLUMN_COUNT
+        if value_nb_cols >= BULMA_COLUMN_COUNT:
+            splitted_class[-1] = BULMA_COLUMN_COUNT
         else:
             offset_class = cl.split('-')
             offset_class[-1] = 'offset-' + str(value_nb_cols)
-            splitted_class[-1] = str(BOOTSTRAP_COLUMN_COUNT - value_nb_cols)
+            splitted_class[-1] = str(BULMA_COLUMN_COUNT - value_nb_cols)
             markup_classes['single_value'] += ' ' + '-'.join(offset_class)
             markup_classes['single_value'] += ' ' + '-'.join(splitted_class)
 
@@ -50,7 +50,7 @@ def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
        and not is_radio(field) and not is_file(field):
         field_classes = field.field.widget.attrs.get('class', '')
-        field_classes += ' form-control'
+        field_classes += ' control'
         field.field.widget.attrs['class'] = field_classes
 
 
