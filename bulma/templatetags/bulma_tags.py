@@ -76,9 +76,6 @@ def render(element, markup_classes):
             template = get_template("bulma/forms/form.html")
             context = {'form': element, 'classes': markup_classes}
 
-        if django_version >= (1, 8):
-            context = context.flatten()
-
     return template.render(context)
 
 
@@ -124,4 +121,4 @@ def is_file(field):
 
 @register.filter
 def addclass(field, css_class):
-    return field.as_widget(attrs={"class":css_class})
+    return field.as_widget(attrs={"class": css_class})
