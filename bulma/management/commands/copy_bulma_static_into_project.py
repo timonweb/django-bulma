@@ -11,12 +11,10 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
-        self.storage = staticfiles_storage
-        self.is_filesystem_storage = issubclass(staticfiles_storage.__class__, FileSystemStorage)
+        self.static_root_bulma_dir = os.path.join(settings.STATIC_ROOT, 'bulma')
 
     def handle(self, *args, **options):
         self.validate()
-        self.clear_dir('bulma')
         self.copy_bulma_files()
 
     def validate(self):
@@ -27,48 +25,21 @@ class Command(BaseCommand):
             raise CommandError("STATIC_ROOT isn't set in your settings. "
                                "Please set STATIC_ROOT before continue")
 
-        if self.storage.exists('bulma'):
+        if os.path.exists(self.static_root_bulma_dir):
             result = input("'bulma' dir already exists in your STATIC_ROOT, "
                            "do you want to overwrite its contents and continue? y/N: ")
             if result.lower() != 'y':
                 raise CommandError('Command aborted')
-
-    def clear_dir(self, path):
-        """
-        Deletes the given relative path using the destination storage backend.
-        """
-        dirs, files = self.storage.listdir(path)
-
-        for f in files:
-            fpath = os.path.join(path, f)
-            try:
-                full_path = self.storage.path(fpath)
-            except NotImplementedError:
-                self.storage.delete(fpath)
-            else:
-                if not os.path.exists(full_path) and os.path.lexists(full_path):
-                    # Delete broken symlinks
-                    os.unlink(full_path)
-                else:
-                    self.storage.delete(fpath)
-        for d in dirs:
-            if self.is_filesystem_storage:
-                shutil.rmtree(os.path.join(settings.STATIC_ROOT, path, d))
-            else:
-                self.clear_dir(os.path.join(path, d))
+            shutil.rmtree(self.static_root_bulma_dir)
 
     def copy_bulma_files(self):
         """
         Copies Bulma static files from package's static/bulma into project's
         STATIC_ROOT/bulma
         """
-        root = os.path.join(
+        original_bulma_dir = os.path.join(
             os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
             'static',
             'bulma'
         )
-        for path, _, files in os.walk(root):
-            for name in files:
-                with open(os.path.join(path, name)) as source_file:
-                    dirname = os.path.relpath(path, root)
-                    self.storage.save(name=os.path.join('bulma', dirname, name), content=source_file)
+        shutil.copytree(original_bulma_dir, self.static_root_bulma_dir)
