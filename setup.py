@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
 setup(
     name='django-bulma',
-    version='0.0.3',
+    version='0.1.0',
     description="""Bulma CSS Framework for Django projects""",
     long_description=readme,
     author='Tim Kamanin',
