@@ -99,21 +99,12 @@
         </div>
 
         <div class="navbar-end">
-          <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
-            Github
-          </a>
-          <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.0.zip">
-                <span class="icon">
-                  <i class="fa fa-download"></i>
-                </span>
-                  <span>Download</span>
-                </a>
-              </p>
-            </div>
-          </div>
+          {% url 'login' as login_url %}
+          {% if login_url %}
+            <a class="navbar-item is-hidden-desktop-only" href="{{ login_url }}">
+              Login
+            </a>
+          {% endif %}
         </div>
       </div>
     </nav>
@@ -142,7 +133,6 @@
       {% block content_title %}{% endblock content_title %}
       {% block content %}{% endblock content %}
     {% endblock content_area %}
-
   </div>
 </section>
 
