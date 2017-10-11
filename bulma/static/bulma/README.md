@@ -1,16 +1,19 @@
 # [Bulma](http://bulma.io)
 
+Bulma is a **modern CSS framework** based on [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes).
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/5pucRKHwhsqiAiYS1CdnS4SM/jgthms/bulma'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/5pucRKHwhsqiAiYS1CdnS4SM/jgthms/bulma.svg' /></a>
+
 [![npm](https://img.shields.io/npm/v/bulma.svg)](https://www.npmjs.com/package/bulma)
 [![npm](https://img.shields.io/npm/dm/bulma.svg)](https://www.npmjs.com/package/bulma)
 [![Join the chat at https://gitter.im/jgthms/bulma](https://badges.gitter.im/jgthms/bulma.svg)](https://gitter.im/jgthms/bulma)
+[![Build Status](https://travis-ci.org/jgthms/bulma.svg?branch=master)](https://travis-ci.org/jgthms/bulma)
 
-Bulma is a modern CSS framework based on [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes).
-
-[![Bulma: a Flexbox CSS framework](https://raw.githubusercontent.com/jgthms/bulma/master/docs/images/bulma-banner.png)](http://bulma.io)
+<a href="http://bulma.io"><img src="https://raw.githubusercontent.com/jgthms/bulma/master/docs/images/bulma-banner.png" alt="Bulma: a Flexbox CSS framework" style="max-width:100%;" width="600" height="315"></a>
 
 ## Quick install
 
-Bulma is in early but active development! Try it out now:
+Bulma is constantly in development! Try it out now:
 
 ### NPM
 
@@ -19,7 +22,7 @@ npm install bulma
 ```
 **or**
 
-### YARN
+### Yarn
 
 ```sh
 yarn add bulma
@@ -65,18 +68,24 @@ Browse the [online documentation here.](http://bulma.io/documentation/overview/s
 
 ## Related projects
 
-* Bulma with Attribute Modules: https://github.com/j5bot/bulma-attribute-selectors
-* Bulma with Rails: https://github.com/joshuajansen/bulma-rails
-* iTemplate: [http://itemplate.ga/](http://itemplate.ga/dashboard.html)
-* Vue Admin powered by Bulma: https://github.com/vue-bulma/vue-admin
-* Bulmaswatch — Free themes for Bulma: https://github.com/jenil/bulmaswatch
-* Goldfish — Vault UI with Bulma, Golang, and Vue Admin: https://github.com/Caiyeon/goldfish
-* ember-bulma - Ember addon providing a collection of UI components for Bulma https://github.com/open-tux/ember-bulma
-* Bloomer — A set of React components for Bulma: https://bloomer.js.org
-* Re-bulma – Bulma components build with React: https://github.com/bokuweb/re-bulma
-* React-bulma – React.js components for bulma: https://github.com/kulakowka/react-bulma
-* Buefy — Lightweight UI components for Vue.js based on Bulma: https://buefy.github.io
-* vue-bulma-components — Bulma components for Vue.js with straightforward syntax: https://github.com/vouill/vue-bulma-components
+| Project                                                                            | Description                                                        |
+|------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| [Bulma with Attribute Modules](https://github.com/j5bot/bulma-attribute-selectors) | Adds support for attribute-based selectors.                        |
+| [Bulma with Rails](https://github.com/joshuajansen/bulma-rails)                    | Integrates Bulma with the rails asset pipeline                     |
+| [Vue Admin](https://github.com/vue-bulma/vue-admin)                                | Vue Admin framework powered by Bulma                               |
+| [Bulmaswatch](https://github.com/jenil/bulmaswatch)                                | Free themes for Bulma                                              |
+| [Goldfish](https://github.com/Caiyeon/goldfish)                                    | Vault UI with Bulma, Golang, and Vue Admin                         |
+| [ember-bulma](https://github.com/open-tux/ember-bulma)                             | Ember addon providing a collection of UI components for Bulma      |
+| [Bloomer](https://bloomer.js.org)                                                  | A set of React components for Bulma                                |
+| [Re-bulma](https://github.com/bokuweb/re-bulma)                                    | Bulma components build with React                                  |
+| [React-bulma](https://github.com/kulakowka/react-bulma)                            | React.js components for Bulma                                      |
+| [Buefy](https://buefy.github.io)                                                   | Lightweight UI components for Vue.js based on Bulma                |
+| [vue-bulma-components](https://github.com/vouill/vue-bulma-components)             | Bulma components for Vue.js with straightforward syntax            |
+| [BulmaJS](https://github.com/VizuaaLOG/BulmaJS)                                    | Javascript integration for Bulma. Written in ES6 with a data-* API |
+| [Bulma.styl](https://github.com/log1x/bulma.styl)                                  | 1:1 Stylus translation of Bulma                                    |
+| [elm-bulma-classes](https://github.com/danielnarey/elm-bulma-classes)              | Bulma prepared for usage with ELM                                  |
+| [Bulma Customizer](https://bulma-customizer.bstash.io/)                            | Bulma Customizer &#8211; Create your own **bespoke** Bulma build   |
+| [Fulma](https://mangelmaxime.github.io/Fulma/)                                     | Wrapper around Bulma for [fable-react](https://github.com/fable-compiler/fable-react)   |
 
 ## Copyright and license
 

@@ -1,8 +1,8 @@
 {
   "_from": "bulma",
-  "_id": "bulma@0.5.1",
+  "_id": "bulma@0.6.0",
   "_inBundle": false,
-  "_integrity": "sha1-2ygxyUr+cyJQx7ElJ6e3kqTcnvg=",
+  "_integrity": "sha1-T1xd5YKBDRGqDPsfMK7Ip5LQ2Sw=",
   "_location": "/bulma",
   "_phantomChildren": {},
   "_requested": {
@@ -19,10 +19,10 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/bulma/-/bulma-0.5.1.tgz",
-  "_shasum": "db2831c94afe732250c7b12527a7b792a4dc9ef8",
+  "_resolved": "https://registry.npmjs.org/bulma/-/bulma-0.6.0.tgz",
+  "_shasum": "4f5c5de582810d11aa0cfb1f30aec8a792d0d92c",
   "_spec": "bulma",
-  "_where": "/Volumes/second/srv/www/bulmasite/bulma/static",
+  "_where": "/Volumes/second/srv/py/django-bulma/bulma/static",
   "author": {
     "name": "Jeremy Thomas",
     "email": "bbxdesign@gmail.com",
@@ -77,5 +77,5 @@
     "test-sass": "node-sass --output-style expanded docs/bulma-test.sass docs/css/bulma-test.css"
   },
   "style": "bulma/css/bulma.css",
-  "version": "0.5.1"
+  "version": "0.6.0"
 }

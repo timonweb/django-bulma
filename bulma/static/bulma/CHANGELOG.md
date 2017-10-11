@@ -1,5 +1,126 @@
 # Bulma Changelog
 
+## 0.6.0
+
+### Breaking changes
+
+* The new `$link` color is part of the `$colors` map. As a result, `.button.is-link` is a colored button now. Use `.button.is-text` if you want the underlined button.
+* The deprecated `variables.sass` file has been removed.
+* The deprecated `nav.sass` file has been removed.
+
+### New features
+
+* #1236 `.table` hover effect is opt-in, by using the `.is-hoverable` modifier class
+* #1254 `.dropdown` now supports `.is-up` modifier
+
+### Improvements
+
+* #1257 Include placeholder mixin in `=input`
+
+The `$link` color is used instead of `$primary` in the following components:
+
+<table>
+  <tr>
+    <th>Variable</th>
+    <th>Old value</th>
+    <th>New value</th>
+  </tr>
+  <tr>
+    <td><code>$dropdown-item-active-color</code></td>
+    <td><code>$primary-invert</code></td>
+    <td><code>$link-invert</code></td>
+  </tr>
+  <tr>
+    <td><code>$dropdown-item-active-background-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$navbar-tab-hover-border-bottom-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$navbar-tab-active-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$navbar-tab-active-border-bottom-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$navbar-dropdown-item-active-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$tabs-link-active-border-bottom-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$tabs-link-active-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$tabs-toggle-link-active-background-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$tabs-toggle-link-active-border-color</code></td>
+    <td><code>$primary</code></td>
+    <td><code>$link</code></td>
+  </tr>
+  <tr>
+    <td><code>$tabs-toggle-link-active-color</code></td>
+    <td><code>$primary-invert</code></td>
+    <td><code>$link-invert</code></td>
+  </tr>
+</table>
+
+### Issues closed
+
+* #708 Import variables in mixins
+
+## 0.5.3
+
+### New features
+
+* #1101 `.card-header-title` can be centered with `.is-centered`
+* #1189 `.input` readonly and `.is-static`
+* #1189 `.textarea` readonly
+
+### Issues closed
+
+* #1177 Fix `.message .tag` combination
+* #1167 Fix `pre code`
+* #1207 Fix `.breadcrumb` alignment
+
+## 0.5.2
+
+### New features
+
+* #842 `navbar` color modifiers
+* #331 Support for third party icons
+* Added `$button-focus-box-shadow-size` and `$button-focus-box-shadow-color` for customization
+* Added `$input-focus-box-shadow-size` and `$input-focus-box-shadow-color` for customization
+* Navbar tabs
+
+### Issues closed
+
+* #1168 Undefined variable: `$navbar-item`
+* #930 Remove `vertical-align: top` for icons
+* #735 Font awesome custom `font-size`
+* #395 Font awesome stacked icons
+* #1152 Level-items not centered horizontally on mobile
+* #1147 Add `text-size-adjust: 100%` to `html`
+* #1106 `pagination` docs
+* #1063 `$family-primary` customization
+
 ## 0.5.1
 
 ### New features
@@ -10,7 +131,7 @@
 
 ### Issues closed
 
-* #1030 Add `!importnant` to non responsive display helpers
+* #1030 Add `!important` to non responsive display helpers
 * #1020 Customizing `.navbar-item img` max height
 * #998 `.navbar-dropdown` with **right** alignment
 * #877 `.pagination` isn't using `$pagination-background`
@@ -227,7 +348,7 @@ Variable name changes (mostly appending `-color`):
 * Split icon container dimensions and icon size
 * Fix delete button by using pixels instead of (r)em
 * Fix level on mobile
-* Add new `.is-spaced` modifer for titles and subtitles
+* Add new `.is-spaced` modifier for titles and subtitles
 
 * Fix #487
 * Fix #489
