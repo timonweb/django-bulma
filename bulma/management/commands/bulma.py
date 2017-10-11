@@ -17,10 +17,11 @@ Usage example:
   python manage.py bulma start
 """
     label = 'command'
+    static_root_bulma_dir = None
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
-        self.bulma_dir = os.path.join(settings.STATIC_ROOT, 'bulma', 'sass')
+        self.bulma_dir = None
 
     def add_arguments(self, parser):
         parser.add_argument('args', metavar=self.label, help='Delete poll instead of closing it', nargs=1)
@@ -30,17 +31,23 @@ Usage example:
         getattr(self, 'handle_' + label)(**options)
 
     def validate(self, label):
-        """
-        Validates if STATIC_ROOT and bulma dir exist.
-        """
-        if not hasattr(settings, 'STATIC_ROOT'):
-            raise CommandError("STATIC_ROOT isn't set in your settings. "
-                               "Please set STATIC_ROOT before continue")
+
+        if len(settings.STATICFILES_DIRS) == 0:
+            raise CommandError(
+                "STATICFILES_DIRS in your settings is empty. "
+                "STATICFILES_DIRS should have at least one directory. "
+                "Bulma static files will be put into first directory listed in STATICFILES_DIRS "
+                "It's a good idea to set first item of STATICFILES_DIRS to os.path.join(BASE_DIR, \"static\")"
+            )
+
+        self.bulma_dir = os.path.join(settings.STATICFILES_DIRS[0], 'bulma', 'sass')
 
         if not os.path.exists(os.path.join(self.bulma_dir, 'package.json')):
-            raise CommandError("It looks like you haven't copied bulma static files into your STATIC_ROOT yet. "
-                           "Please run 'python manage.py copy_bulma_static_into_project' to copy bulma static files"
-                           "and then comeback.")
+            raise CommandError(
+                "It looks like you haven't copied bulma static files into your "
+                "first STATICFILES_DIRS directory yet. "
+                "Please run 'python manage.py copy_bulma_static_into_project' to copy bulma static files"
+                "and then comeback.")
 
         if label not in ['install', 'build', 'start']:
             raise CommandError("Subcommand doesn't exist")
