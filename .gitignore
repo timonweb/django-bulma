@@ -137,5 +137,6 @@ Temporary Items
 # End of https://www.gitignore.io/api/macos
 
 # Example project
-demo
+demo/static/bulma
+demo/bulma
 db.sqlite3
