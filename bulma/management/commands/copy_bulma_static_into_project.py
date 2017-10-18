@@ -1,10 +1,7 @@
 import os
 import shutil
 from django.conf import settings
-from django.conf.global_settings import STATICFILES_DIRS
-from django.core.files.storage import FileSystemStorage
 from django.core.management import BaseCommand, CommandError
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 class Command(BaseCommand):
