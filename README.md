@@ -16,7 +16,7 @@ A Django base theme based on Bulma (bulma.io). Bulma is a modern CSS framework b
 
   ``'bulma',``
 
-3. You can now extend the bulma theme:
+3. If you want to use the provided base template, extend from bulma/base.html:
 
   ```
   {% extends 'bulma/base.html' %}
@@ -24,30 +24,57 @@ A Django base theme based on Bulma (bulma.io). Bulma is a modern CSS framework b
   {% block title %}Bulma Site{% endblock %}
 
   {% block content %}
-  bla...
+    Content goes here...
   {% endblock content %}
 
   ```
+  
+4. If you want to customize bulma sass and your own components:
 
-3. In your templates, load the ``bulma_tags`` library and use the ``|bulma`` filters:
+    4.1 Copy bulma static files into your project's STATIC_ROOT:
 
-## Example template
+    ```
+    python manage.py copy_bulma_static_into_project
+    ```  
+    You should see 'bulma' dir appeared in your STATIC_ROOT. It contains
+    three dirs:
+    * lib - where we put original and untouched bulma package, in most cases
+    you shouldn't mess with it
+    * sass - this is the place where you can put your own sass code and customize
+    bulma variables
+    * css - this is where compiled sass output goes, you should link this file
+    in your base.html 
 
-  ```django
+    4.2 Install npm packages for sass compilation to work:    
+    
+    ```
+    python manage.py bulma install
+    ```
+    
+    4.3 Start sass watch mode:
+    ```
+    python manage.py bulma start
+    ```
 
-   {% load bulma_tags %}
 
-   {# Display a form #}
+4. For forms, in your templates, load the ``bulma_tags`` library and use the ``|bulma`` filters:
 
-   <form action="/url/to/submit/" method="post">
-       {% csrf_token %}
-       {% form|bulma %}
-       <div class="field">
-         <button type="submit" class="button is-primary">Login/button>
-       </div>
-       <input type="hidden" name="next" value="{{ next }}"/>
-   </form>
-   ```
+    ##### Example template
+    
+      ```django
+    
+       {% load bulma_tags %}
+    
+       {# Display a form #}
+    
+       <form action="/url/to/submit/" method="post">
+           {% csrf_token %}
+           {% form|bulma %}
+           <div class="field">
+             <button type="submit" class="button is-primary">Login/button>
+           </div>
+           <input type="hidden" name="next" value="{{ next }}"/>
+       </form>
 
 ## Included templates
 
@@ -55,10 +82,6 @@ A Django base theme based on Bulma (bulma.io). Bulma is a modern CSS framework b
 * a base template
 * registration templates
 * account templates
-
-## Documentation
-
-To be done
 
 ## Bugs and suggestions
 

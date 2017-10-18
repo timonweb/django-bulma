@@ -31,5 +31,5 @@
     "test-sass": "node-sass --output-style expanded ../bulma/docs/bulma-test.sass ../bulma/docs/css/bulma-test.css"
   },
   "style": "../css/style.css",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
