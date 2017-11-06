@@ -96,7 +96,13 @@ def is_textarea(field):
 
 @register.filter
 def is_input(field):
-    return isinstance(field.field.widget, (forms.TextInput, forms.EmailInput, forms.PasswordInput))
+    return isinstance(field.field.widget, (
+        forms.TextInput,
+        forms.NumberInput,
+        forms.EmailInput,
+        forms.PasswordInput,
+        forms.URLInput
+    ))
 
 
 @register.filter
