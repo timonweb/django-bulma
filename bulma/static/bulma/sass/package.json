@@ -8,7 +8,7 @@
   "deprecated": false,
   "description": "Bulma for Django",
   "dependencies": {
-    "bulma": "0.6.0"
+    "bulma": "0.6.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -28,5 +28,5 @@
     "start": "npm run build-sass -- --watch"
   },
   "style": "../css/style.css",
-  "version": "0.3.0"
+  "version": "0.3.1"
 }
