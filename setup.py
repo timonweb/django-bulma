@@ -13,7 +13,7 @@ setup(
     long_description=readme,
     author='Tim Kamanin',
     author_email='tim@timonweb.com',
-    url='https://github.com/timonweb/django-bulma',
+    url='https://timonweb.com/oss/django-bulma/',
     packages=[
         'bulma',
     ],
