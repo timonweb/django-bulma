@@ -82,7 +82,7 @@
     <label class="label {{ classes.label }}
         {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
     <div class="control {{ classes.value }}">
-      <span class="select">
+      <span class="select{% if field|is_multiple_select %} is-multiple{% endif %}">
         {{ field }}
       </span>
       {% for error in field.errors %}

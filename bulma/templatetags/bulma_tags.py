@@ -90,6 +90,11 @@ def is_select(field):
 
 
 @register.filter
+def is_multiple_select(field):
+    return isinstance(field.field.widget, forms.SelectMultiple)
+
+
+@register.filter
 def is_textarea(field):
     return isinstance(field.field.widget, forms.Textarea)
 
