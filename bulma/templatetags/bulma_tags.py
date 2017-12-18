@@ -133,3 +133,10 @@ def is_file(field):
 @register.filter
 def addclass(field, css_class):
     return field.as_widget(attrs={"class": css_class})
+
+
+@register.filter
+def bulma_message_tag(tag):
+    return {
+        'error': 'danger'
+    }.get(tag, tag)
