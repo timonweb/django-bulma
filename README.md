@@ -72,7 +72,7 @@ A Django base theme based on Bulma (<a href="https://bulma.io/">bulma.io</a>). B
        {% csrf_token %}
        {% form|bulma %}
        <div class="field">
-         <button type="submit" class="button is-primary">Login/button>
+         <button type="submit" class="button is-primary">Login</button>
        </div>
        <input type="hidden" name="next" value="{{ next }}"/>
     </form>
