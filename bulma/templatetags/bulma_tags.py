@@ -32,7 +32,7 @@ def bulma_horizontal(element, label_cols='is-2'):
             value_nb_cols = BULMA_COLUMN_COUNT
 
         if value_nb_cols >= BULMA_COLUMN_COUNT:
-            splitted_class[-1] = BULMA_COLUMN_COUNT
+            splitted_class[-1] = str(BULMA_COLUMN_COUNT)
         else:
             offset_class = cl.split('-')
             offset_class[-1] = 'offset-' + str(value_nb_cols)
