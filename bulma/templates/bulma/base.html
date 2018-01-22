@@ -1,6 +1,6 @@
 {% load static bulma_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html {% if LANGUAGE_CODE %} lang="{{ LANGUAGE_CODE }}"{% endif %}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,8 +8,8 @@
   {% block css %}
     <link rel="stylesheet" href="{% static 'bulma/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'bulma/css/style.css' %}">
-    {% block extra_css %}{% endblock extra_css %}
   {% endblock css %}
+    {% block extra_css %}{% endblock extra_css %}
 </head>
 <body>
 
@@ -159,8 +159,7 @@
   </footer>
 {% endblock footer %}
 
-{% block javascript %}
-  {% block extra_javascript %}{% endblock extra_javascript %}
-{% endblock javascript %}
+{% block javascript %}{% endblock javascript %}
+{% block extra_javascript %}{% endblock extra_javascript %}
 </body>
 </html>
