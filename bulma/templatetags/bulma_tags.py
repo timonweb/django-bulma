@@ -2,6 +2,8 @@ from django import forms, VERSION as django_version
 from django.template.loader import get_template
 from django import template
 
+from ..bulma import css_url
+
 register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
@@ -140,3 +142,20 @@ def bulma_message_tag(tag):
     return {
         'error': 'danger'
     }.get(tag, tag)
+
+
+
+@register.simple_tag
+def bulma_css_url():
+    """
+    Return the full url to the Bootstrap CSS library
+    Default value: ``None``
+    This value is configurable, see Settings section
+    **Tag name**::
+        bootstrap_css_url
+    **Usage**::
+        {% bootstrap_css_url %}
+    **Example**::
+        {% bootstrap_css_url %}
+    """
+    return css_url()
