@@ -4,6 +4,7 @@ from django import template
 from django.utils.safestring import mark_safe
 
 from ..bulma import css_url
+from ..utils import render_link_tag
 
 register = template.Library()
 
