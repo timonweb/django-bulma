@@ -4,18 +4,23 @@
 
 <nav class="{{ pagination_css_classes }}" role="navigation" aria-label="pagination">
   <ul class="pagination-list">
-{#      {% if current_page == 1 %}#}
-{#          <a class="pagination-previous" disabled>&laquo;</a>#}
-{#      {% else %}#}
-{#          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name 1 %}">&laquo;</a>#}
-{#      {% endif %}#}
+      {% if current_page == 1 %}
+          <a class="pagination-previous" disabled>&laquo;</a>
+      {% else %}
+          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name 1 %}">&laquo;</a>
+      {% endif %}
 
-      {% if pages_back %}
-          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name pages_back %}">&hellip;</a>
+      {% if current_page == num_pages %}
+          <a class="pagination-next" disabled>&raquo;</a>
+      {% else %}
+          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name num_pages %}">&raquo;</a>
       {% endif %}
-       {% if pages_forward %}
-          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name pages_forward %}">&hellip;</a>
-      {% endif %}
+{#      {% if pages_back %}#}
+{#          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name pages_back %}">&hellip;</a>#}
+{#      {% endif %}#}
+{#       {% if pages_forward %}#}
+{#          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name pages_forward %}">&hellip;</a>#}
+{#      {% endif %}#}
 
 
       {% for p in pages_shown %}
@@ -32,11 +37,7 @@
 
 
 
-{#      {% if current_page == num_pages %}#}
-{#          <a class="pagination-next" disabled>&raquo;</a>#}
-{#      {% else %}#}
-{#          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name num_pages %}">&raquo;</a>#}
-{#      {% endif %}#}
+
   </ul>
 </nav>
 
