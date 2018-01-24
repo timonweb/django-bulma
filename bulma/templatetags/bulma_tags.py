@@ -1,6 +1,7 @@
 from django import forms, VERSION as django_version
 from django.template.loader import get_template
 from django import template
+from django.utils.safestring import mark_safe
 
 from ..bulma import css_url
 
@@ -148,14 +149,36 @@ def bulma_message_tag(tag):
 @register.simple_tag
 def bulma_css_url():
     """
-    Return the full url to the Bootstrap CSS library
+    Return the full url to the Bulma CSS library
     Default value: ``None``
     This value is configurable, see Settings section
     **Tag name**::
-        bootstrap_css_url
+        bulma_css_url
     **Usage**::
-        {% bootstrap_css_url %}
+        {% bulma_css_url %}
     **Example**::
-        {% bootstrap_css_url %}
+        {% bulma_css_url %}
     """
     return css_url()
+
+
+@register.simple_tag
+def bulma_css():
+    """
+    Return HTML for Bulma CSS.
+    Adjust url in settings. If no url is returned, we don't want this statement
+    to return any HTML.
+    This is intended behavior.
+    Default value: ``None``
+    This value is configurable, see Settings section
+    **Tag name**::
+        bulma_css
+    **Usage**::
+        {% bulma_css %}
+    **Example**::
+        {% bulma_css %}
+    """
+    rendered_urls = [render_link_tag(bulma_css_url()), ]
+    # if bootstrap_theme_url():
+    #     rendered_urls.append(render_link_tag(bootstrap_theme_url()))
+    return mark_safe(''.join([url for url in rendered_urls]))
