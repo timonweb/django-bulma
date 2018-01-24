@@ -17,8 +17,11 @@ BULMA_DEFAULTS = {
     # The URL to the jQuery JavaScript file
     'jquery_url': '//cdn.bootcss.com/jquery/1.12.4/jquery.min.js',
 
-    # The Bootstrap base URL
+    # The Bulma base URL
     'base_url': '//cdn.bootcss.com/bulma/0.6.2/',
+
+   # THE FontAwesome URL
+    'font_awesome_url': "//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css",
 }
 
 
@@ -48,6 +51,13 @@ def jquery_url():
     """
     return get_bulma_setting('jquery_url')
 
+
+def font_awesome_url():
+    """
+    Return the font-awesome file to use
+    :return:
+    """
+    return get_bulma_setting('font_awesome_url')
 
 
 def css_url():

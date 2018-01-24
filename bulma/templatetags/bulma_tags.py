@@ -3,7 +3,7 @@ from django.template.loader import get_template
 from django import template
 from django.utils.safestring import mark_safe
 
-from ..bulma import css_url
+from ..bulma import (css_url, font_awesome_url)
 from ..utils import render_link_tag
 
 register = template.Library()
@@ -180,6 +180,6 @@ def bulma_css():
         {% bulma_css %}
     """
     rendered_urls = [render_link_tag(bulma_css_url()), ]
-    # if bootstrap_theme_url():
-    #     rendered_urls.append(render_link_tag(bootstrap_theme_url()))
+    if font_awesome_url():
+        rendered_urls.append(render_link_tag(font_awesome_url()))
     return mark_safe(''.join([url for url in rendered_urls]))
