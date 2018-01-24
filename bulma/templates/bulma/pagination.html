@@ -3,8 +3,8 @@
 
 
 <nav class="{{ pagination_css_classes }}" role="navigation" aria-label="pagination">
-  <ul class="pagination-list">
-      {% if current_page == 1 %}
+
+    {% if current_page == 1 %}
           <a class="pagination-previous" disabled>&laquo;</a>
       {% else %}
           <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name 1 %}">&laquo;</a>
@@ -15,6 +15,8 @@
       {% else %}
           <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name num_pages %}">&raquo;</a>
       {% endif %}
+    <ul class="pagination-list">
+
 {#      {% if pages_back %}#}
 {#          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name pages_back %}">&hellip;</a>#}
 {#      {% endif %}#}
@@ -22,23 +24,18 @@
 {#          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name pages_forward %}">&hellip;</a>#}
 {#      {% endif %}#}
 
-
-      {% for p in pages_shown %}
-          {% if current_page == p %}
-              <li>
-                  <a class="pagination-link is-current">{{ p }}</a>
-              </li>
-          {% else %}
-              <li>
-                  <a class="pagination-link" href="{% bulma_url_replace_param bpurl parameter_name p %}">{{ p }}</a>
-              </li>
-          {% endif %}
-      {% endfor %}
-
-
-
-
-  </ul>
+        {% for p in pages_shown %}
+            {% if current_page == p %}
+                <li>
+                    <a class="pagination-link is-current">{{ p }}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="pagination-link" href="{% bulma_url_replace_param bpurl parameter_name p %}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 </nav>
 
 
