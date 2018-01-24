@@ -1,4 +1,16 @@
+
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
+
+try:
+    from urlparse import urlparse, parse_qs, urlunparse
+except ImportError:
+    from urllib.parse import urlparse, parse_qs, urlunparse
+
 from django.forms.utils import flatatt
+from django.utils.encoding import force_str, force_text
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 
@@ -30,3 +42,22 @@ def render_tag(tag, attrs=None, content=None, close=True):
         attrs=mark_safe(flatatt(attrs)) if attrs else '',
         content=text_value(content),
     )
+
+
+
+def url_replace_param(url, name, value):
+    """
+    Replace a GET parameter in an URL
+    """
+    url_components = urlparse(force_str(url))
+    query_params = parse_qs(url_components.query)
+    query_params[name] = value
+    query = urlencode(query_params, doseq=True)
+    return force_text(urlunparse([
+        url_components.scheme,
+        url_components.netloc,
+        url_components.path,
+        url_components.params,
+        query,
+        url_components.fragment,
+    ]))
