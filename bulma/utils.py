@@ -1,3 +1,4 @@
+from django.forms.utils import flatatt
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 
