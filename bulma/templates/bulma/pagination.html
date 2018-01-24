@@ -11,9 +11,10 @@
 {#      {% endif %}#}
 
       {% if pages_back %}
-          <li>
-              <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name pages_back %}">&hellip;</a>
-          </li>
+          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name pages_back %}">&hellip;</a>
+      {% endif %}
+       {% if pages_forward %}
+          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name pages_forward %}">&hellip;</a>
       {% endif %}
 
 
@@ -29,11 +30,7 @@
           {% endif %}
       {% endfor %}
 
-      {% if pages_forward %}
-          <li>
-              <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name pages_forward %}">&hellip;</a>
-          </li>
-      {% endif %}
+
 
 {#      {% if current_page == num_pages %}#}
 {#          <a class="pagination-next" disabled>&raquo;</a>#}
