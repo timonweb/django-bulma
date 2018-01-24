@@ -3,7 +3,7 @@ from django.template.loader import get_template
 from django import template
 from django.utils.safestring import mark_safe
 
-from ..bulma import (css_url, font_awesome_url)
+from ..bulma import (jquery_url, css_url, font_awesome_url)
 from ..utils import render_link_tag
 
 register = template.Library()
@@ -145,6 +145,21 @@ def bulma_message_tag(tag):
         'error': 'danger'
     }.get(tag, tag)
 
+
+@register.simple_tag
+def bulma_jquery_url():
+    """
+    **Tag name**::
+        bootstrap_jquery_url
+    Return the full url to jQuery file to use
+    Default value: ``//code.jquery.com/jquery.min.js``
+    This value is configurable, see Settings section
+    **Usage**::
+        {% bulma_jquery_url %}
+    **Example**::
+        {% bulma_jquery_url %}
+    """
+    return jquery_url()
 
 
 @register.simple_tag
