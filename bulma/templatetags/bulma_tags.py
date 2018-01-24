@@ -318,7 +318,7 @@ def get_pagination_context(page, pages_to_show=11,
     if url:
         url = url.replace('?&', '?')
     # Set CSS classes, see https://bulma.io/documentation/components/pagination/
-    pagination_css_classes = ['pagination']
+    pagination_css_classes = ['pagination', 'is-centered']
     if size == 'small':
         pagination_css_classes.append('is-small')
     elif size == 'large':
