@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock title %}</title>
-  {% block css %}
-    <link rel="stylesheet" href="{% static 'bulma/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bulma/css/style.css' %}">
-  {% endblock css %}
+{#  {% block css %}#}
+{#    <link rel="stylesheet" href="{% static 'bulma/css/font-awesome.min.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'bulma/css/style.css' %}">#}
+{#  {% endblock css %}#}
+    {% bulma_css %}
     {% block extra_css %}{% endblock extra_css %}
 </head>
 <body>
