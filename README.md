@@ -81,9 +81,9 @@ A Django base theme based on Bulma (<a href="https://bulma.io/">bulma.io</a>). B
 ## Included templates
 
 **django-bulma** comes with:
-* a base template
-* registration templates
-* account templates
+* a base template,
+* django core registration templates,
+* django-allauth account templates.
 
 ## Bugs and suggestions
 
