@@ -8,7 +8,7 @@ with open('README.md') as readme_file:
 
 setup(
     name='django-bulma',
-    version='0.3.3',
+    version='0.3.4',
     description="""Bulma CSS Framework for Django projects""",
     long_description=readme,
     author='Tim Kamanin',
