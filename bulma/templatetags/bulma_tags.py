@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import re
 from math import floor
 
-from django import forms, VERSION as django_version
+from django import forms
 from django.template.loader import get_template
 from django import template
 from django.utils.safestring import mark_safe
@@ -44,7 +44,7 @@ def bulma_horizontal(element, label_cols='is-2'):
             value_nb_cols = BULMA_COLUMN_COUNT
 
         if value_nb_cols >= BULMA_COLUMN_COUNT:
-            splitted_class[-1] = BULMA_COLUMN_COUNT
+            splitted_class[-1] = str(BULMA_COLUMN_COUNT)
         else:
             offset_class = cl.split('-')
             offset_class[-1] = 'offset-' + str(value_nb_cols)
