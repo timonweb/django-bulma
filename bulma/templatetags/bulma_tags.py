@@ -208,7 +208,7 @@ def bulma_css():
     return mark_safe(''.join([url for url in rendered_urls]))
 
 
-@register.inclusion_tag('bulma/pagination.html')
+@register.inclusion_tag('pagination.html')
 def bulma_pagination(page, **kwargs):
     """
     Render pagination for a page
