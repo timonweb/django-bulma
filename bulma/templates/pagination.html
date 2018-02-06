@@ -1,26 +1,31 @@
-{% load i18n %}
+{% load bulma_tags %}
+{% with bpurl=bulma_pagination_url|default:"" %}
+<nav class="{{ pagination_css_classes }}" role="navigation" aria-label="pagination">
 
-{% if is_paginated %}
-<nav class="pagination is-centered">
-  {% if page_obj.has_previous %}
-    <a class="pagination-previous" href="?page=
-        {{ page_obj.previous_page_number|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{% trans "Previous" %}</a>
-  {% else %}
-    <a class="pagination-previous" disabled>{% trans "Previous" %}</a>
-  {% endif %}
+    {% if current_page == 1 %}
+          <a class="pagination-previous" disabled>&laquo;</a>
+      {% else %}
+          <a class="pagination-previous" href="{% bulma_url_replace_param bpurl parameter_name 1 %}">&laquo;</a>
+      {% endif %}
 
-  {% if page_obj.has_next %}
-    <a class="pagination-next"
-       href="?page={{ page_obj.next_page_number|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{% trans "Next" %}</a>
-  {% else %}
-    <a class="pagination-next" disabled>{% trans "Next" %}</a>
-  {% endif %}
+      {% if current_page == num_pages %}
+          <a class="pagination-next" disabled>&raquo;</a>
+      {% else %}
+          <a class="pagination-next" href="{% bulma_url_replace_param bpurl parameter_name num_pages %}">&raquo;</a>
+      {% endif %}
+    <ul class="pagination-list">
 
-  <ul class="pagination-list">
-    {% for page in paginator.page_range %}
-      <li><a class="pagination-link{% ifequal page page_obj.number %} is-current{% endifequal %}"
-             href="?page={{ page|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{{ page|stringformat:"d" }}</a></li>
-    {% endfor %}
-  </ul>
+        {% for p in pages_shown %}
+            {% if current_page == p %}
+                <li>
+                    <a class="pagination-link is-current">{{ p }}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="pagination-link" href="{% bulma_url_replace_param bpurl parameter_name p %}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 </nav>
-{% endif %}
+{% endwith %}

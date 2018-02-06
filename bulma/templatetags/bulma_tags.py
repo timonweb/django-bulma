@@ -158,7 +158,7 @@ def bulma_message_tag(tag):
 def bulma_jquery_url():
     """
     **Tag name**::
-        bootstrap_jquery_url
+        bulma_jquery_url
     Return the full url to jQuery file to use
     Default value: ``//code.jquery.com/jquery.min.js``
     This value is configurable, see Settings section
