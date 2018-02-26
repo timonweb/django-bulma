@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Task</td>
+        <td>Done?</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in object_list %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>
+            <span class="icon">
+              <i class="fa fa-{% if task.done %}check{% else %}times{% endif %}"></i>
+            </span>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include 'pagination.html' %}
+{% endblock %}

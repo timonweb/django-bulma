@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^showcase/', include('showcase.urls', namespace='showcase')),
 ]
