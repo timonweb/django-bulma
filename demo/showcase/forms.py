@@ -8,22 +8,20 @@ COLOR_CHOICES = (
 
 
 class FormExample(forms.Form):
-    text = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    number = forms.CharField(required=False, widget=forms.NumberInput())
-    url = forms.CharField(required=False, widget=forms.URLInput())
-    password = forms.CharField(required=False, widget=forms.PasswordInput())
-    select = forms.ChoiceField(required=False, choices=COLOR_CHOICES)
-    multi_select = forms.MultipleChoiceField(required=False, choices=COLOR_CHOICES)
-    textarea = forms.CharField(required=False, widget=forms.Textarea())
-    checkbox = forms.BooleanField(required=False)
+    text = forms.CharField()
+    email = forms.EmailField()
+    number = forms.CharField(widget=forms.NumberInput())
+    url = forms.CharField(widget=forms.URLInput())
+    password = forms.CharField(widget=forms.PasswordInput())
+    select = forms.ChoiceField(choices=COLOR_CHOICES)
+    multi_select = forms.MultipleChoiceField(choices=COLOR_CHOICES)
+    textarea = forms.CharField(widget=forms.Textarea())
+    checkbox = forms.BooleanField()
     checkboxes = forms.MultipleChoiceField(
-        required=False,
         choices=COLOR_CHOICES,
         widget=forms.CheckboxSelectMultiple()
     )
     radios = forms.ChoiceField(
-        required=False,
         choices=COLOR_CHOICES,
         widget=forms.RadioSelect()
     )

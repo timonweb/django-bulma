@@ -132,6 +132,8 @@ def is_file(field):
 
 @register.filter
 def addclass(field, css_class):
+    if len(field.errors) > 0:
+        css_class += ' is-danger'
     return field.as_widget(attrs={"class": css_class})
 
 
