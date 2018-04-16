@@ -4,29 +4,29 @@
     "email": "tim@timonweb.com",
     "url": "http://timonweb.com"
   },
-  "bundleDependencies": false,
-  "deprecated": false,
   "description": "Bulma for Django",
   "dependencies": {
-    "bulma": "0.6.2"
+    "bulma": "0.7.0"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
-    "node-sass": "^4.5.3",
-    "postcss-cli": "^4.1.0",
-    "rimraf": "^2.6.1"
+    "autoprefixer": "^8.2.0",
+    "clean-css-cli": "^4.1.11",
+    "node-sass": "^4.8.3",
+    "postcss-cli": "^5.0.0",
+    "rimraf": "^2.6.2"
   },
   "license": "MIT",
   "main": "style.sass",
+  "style": "../css/style.min.css",
   "name": "django_bulma",
   "scripts": {
-    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix",
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix && npm run build-cleancss",
     "build-autoprefix": "postcss --use autoprefixer --map false --output ../css/style.css ../css/style.css",
+    "build-cleancss": "cleancss -o ../css/style.min.css ../css/style.css",
     "build-clean": "rimraf css",
     "build-sass": "node-sass --output-style expanded --source-map true style.sass ../css/style.css",
-    "deploy": "npm run build && npm run docs",
+    "deploy": "npm run build",
     "start": "npm run build-sass -- --watch"
   },
-  "style": "../css/style.css",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }
