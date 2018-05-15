@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data" action="{% url 'showcase:form' %}" novalidate>
+    {% csrf_token %}
+    {{ form|bulma }}
+    <button class="button is-primary">Submit</button>
+  </form>
+{% endblock %}

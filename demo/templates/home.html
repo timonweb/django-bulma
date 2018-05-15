@@ -9,6 +9,13 @@
     <p class="subtitle">
       My first website with <strong>Django-Bulma</strong>!
     </p>
+    <div class="content">
+      <h2 class="subtitle">Demo pages:</h2>
+      <ul>
+        <li><a href="{% url 'showcase:paginated_list' %}">Paginated list</a></li>
+        <li><a href="{% url 'showcase:form' %}">Form fields</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 {% endblock %}

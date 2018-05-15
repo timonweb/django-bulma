@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'bulma',
+    'showcase',
 
     'allauth',
     'allauth.account',
