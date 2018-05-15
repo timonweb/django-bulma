@@ -9,7 +9,6 @@ from django.template.loader import get_template
 from django import template
 from django.utils.safestring import mark_safe
 
-
 from ..bulma import (jquery_url, css_url, font_awesome_url)
 from ..utils import (render_link_tag, url_replace_param)
 from ..text import force_text
@@ -17,6 +16,7 @@ from ..text import force_text
 register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
+
 
 @register.filter
 def bulma(element):
@@ -32,7 +32,6 @@ def bulma_inline(element):
 
 @register.filter
 def bulma_horizontal(element, label_cols='is-2'):
-
     markup_classes = {'label': label_cols, 'value': '', 'single_value': ''}
 
     for cl in label_cols.split(' '):
@@ -56,10 +55,11 @@ def bulma_horizontal(element, label_cols='is-2'):
 
     return render(element, markup_classes)
 
+
 @register.filter
 def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
-       and not is_radio(field) and not is_file(field):
+            and not is_radio(field) and not is_file(field):
         field_classes = field.field.widget.attrs.get('class', '')
         field_classes += ' control'
         field.field.widget.attrs['class'] = field_classes
@@ -93,7 +93,7 @@ def render(element, markup_classes):
 
 @register.filter
 def widget_type(field):
-        return field.field.widget
+    return field.field.widget
 
 
 @register.filter
@@ -154,22 +154,6 @@ def bulma_message_tag(tag):
     return {
         'error': 'danger'
     }.get(tag, tag)
-
-
-@register.simple_tag
-def bulma_jquery_url():
-    """
-    **Tag name**::
-        bulma_jquery_url
-    Return the full url to jQuery file to use
-    Default value: ``//code.jquery.com/jquery.min.js``
-    This value is configurable, see Settings section
-    **Usage**::
-        {% bulma_jquery_url %}
-    **Example**::
-        {% bulma_jquery_url %}
-    """
-    return jquery_url()
 
 
 @register.simple_tag

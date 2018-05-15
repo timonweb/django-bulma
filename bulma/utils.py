@@ -1,4 +1,3 @@
-
 try:
     from urllib import urlencode
 except ImportError:
@@ -29,6 +28,7 @@ def render_link_tag(url, rel='stylesheet', media=None):
         attrs['media'] = media
     return render_tag('link', attrs=attrs, close=False)
 
+
 def render_tag(tag, attrs=None, content=None, close=True):
     """
     Render a HTML tag
@@ -42,7 +42,6 @@ def render_tag(tag, attrs=None, content=None, close=True):
         attrs=mark_safe(flatatt(attrs)) if attrs else '',
         content=text_value(content),
     )
-
 
 
 def url_replace_param(url, name, value):
