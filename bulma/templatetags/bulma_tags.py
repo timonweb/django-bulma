@@ -7,11 +7,12 @@ from math import floor
 from django import forms
 from django.template.loader import get_template
 from django import template
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from ..bulma import (css_url, font_awesome_url)
 from ..utils import (render_link_tag, url_replace_param)
-from ..text import force_text
+# from ..text import force_text
 
 register = template.Library()
 
