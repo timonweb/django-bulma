@@ -9,7 +9,7 @@ from django.template.loader import get_template
 from django import template
 from django.utils.safestring import mark_safe
 
-from ..bulma import (jquery_url, css_url, font_awesome_url)
+from ..bulma import (css_url, font_awesome_url)
 from ..utils import (render_link_tag, url_replace_param)
 from ..text import force_text
 
