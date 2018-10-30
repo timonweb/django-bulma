@@ -1,10 +1,12 @@
 from django import forms, VERSION as django_version
 from django.template.loader import get_template
 from django import template
+from django.forms import BoundField
 
 register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
+
 
 @register.filter
 def bulma(element):
@@ -44,6 +46,7 @@ def bulma_horizontal(element, label_cols='is-2'):
 
     return render(element, markup_classes)
 
+
 @register.filter
 def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
@@ -54,12 +57,11 @@ def add_input_classes(field):
 
 
 def render(element, markup_classes):
-    element_type = element.__class__.__name__.lower()
-
-    if element_type == 'boundfield':
+    if isinstance(element, BoundField):
         add_input_classes(element)
         template = get_template("bulma/forms/field.html")
-        context = {'field': element, 'classes': markup_classes, 'form': element.form}
+        context = {'field': element,
+                   'classes': markup_classes, 'form': element.form}
     else:
         has_management = getattr(element, 'management_form', None)
         if has_management:
@@ -81,7 +83,7 @@ def render(element, markup_classes):
 
 @register.filter
 def widget_type(field):
-        return field.field.widget
+    return field.field.widget
 
 
 @register.filter
