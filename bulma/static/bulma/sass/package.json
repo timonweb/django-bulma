@@ -28,5 +28,5 @@
     "deploy": "npm run build",
     "start": "npm run build-sass -- --watch"
   },
-  "version": "0.5.2"
+  "version": "0.5.3"
 }
