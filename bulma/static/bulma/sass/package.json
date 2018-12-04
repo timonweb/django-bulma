@@ -6,7 +6,7 @@
   },
   "description": "Bulma for Django",
   "dependencies": {
-    "bulma": "0.7.0"
+    "bulma": "0.7.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
@@ -28,5 +28,5 @@
     "deploy": "npm run build",
     "start": "npm run build-sass -- --watch"
   },
-  "version": "0.5.0"
+  "version": "0.5.3"
 }

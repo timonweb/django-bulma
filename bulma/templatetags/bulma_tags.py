@@ -13,6 +13,7 @@ from django.utils.safestring import mark_safe
 from ..bulma import (css_url, font_awesome_url)
 from ..utils import (render_link_tag, url_replace_param)
 # from ..text import force_text
+from django.forms import BoundField
 
 register = template.Library()
 
@@ -67,12 +68,11 @@ def add_input_classes(field):
 
 
 def render(element, markup_classes):
-    element_type = element.__class__.__name__.lower()
-
-    if element_type == 'boundfield':
+    if isinstance(element, BoundField):
         add_input_classes(element)
         template = get_template("bulma/forms/field.html")
-        context = {'field': element, 'classes': markup_classes, 'form': element.form}
+        context = {'field': element,
+                   'classes': markup_classes, 'form': element.form}
     else:
         has_management = getattr(element, 'management_form', None)
         if has_management:
