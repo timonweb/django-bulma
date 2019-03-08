@@ -16,6 +16,14 @@ setup(
     url="https://timonweb.com/oss/django-bulma/",
     packages=["bulma"],
     include_package_data=True,
+    use_scm_version={
+        'write_to': "bulma/version.py",
+        'version_scheme': 'guess-next-dev',
+        'local_scheme': 'node-and-date',
+    },
+    setup_requires=[
+        'setuptools_scm'
+    ],
     install_requires=[],
     license="The MIT License (MIT)",
     zip_safe=False,
