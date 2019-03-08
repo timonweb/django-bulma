@@ -1,20 +1,20 @@
 {% load bulma_tags %}
-<div class="field">
-  {% if field|is_checkbox %}
-    {% include "bulma/forms/fields/checkbox.html" %}
-  {% elif field|is_multiple_checkbox %}
-    {% include "bulma/forms/fields/multiple_checkbox.html" %}
-  {% elif field|is_radio %}
-    {% include "bulma/forms/fields/radio.html" %}
-  {% elif field|is_input %}
-    {% include "bulma/forms/fields/input.html" %}
-  {% elif field|is_textarea %}
-    {% include "bulma/forms/fields/textarea.html" %}
-  {% elif field|is_select %}
-    {% include "bulma/forms/fields/select.html" %}
-  {% elif field|is_file %}
-    {% include "bulma/forms/fields/file.html" %}
-  {% else %}
-    {% include "bulma/forms/fields/other.html" %}
-  {% endif %}
-</div>
+{% if not is_addon %}<div class="field{% if classes.field_css_class %} {{ classes.field_css_class }}{% endif %}">{% endif %}
+{% if field|is_checkbox %}
+  {% include "bulma/forms/fields/checkbox.html" %}
+{% elif field|is_multiple_checkbox %}
+  {% include "bulma/forms/fields/multiple_checkbox.html" %}
+{% elif field|is_radio %}
+  {% include "bulma/forms/fields/radio.html" %}
+{% elif field|is_input %}
+  {% include "bulma/forms/fields/input.html" %}
+{% elif field|is_textarea %}
+  {% include "bulma/forms/fields/textarea.html" %}
+{% elif field|is_select %}
+  {% include "bulma/forms/fields/select.html" %}
+{% elif field|is_file %}
+  {% include "bulma/forms/fields/file.html" %}
+{% else %}
+  {% include "bulma/forms/fields/other.html" %}
+{% endif %}
+{% if not is_addon %}</div>{% endif %}
