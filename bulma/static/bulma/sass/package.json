@@ -27,6 +27,5 @@
     "build-sass": "node-sass --output-style expanded --source-map true style.sass ../css/style.css",
     "deploy": "npm run build",
     "start": "npm run build-sass -- --watch"
-  },
-  "version": "0.5.4"
+  }
 }
