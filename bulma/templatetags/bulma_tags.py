@@ -1,11 +1,26 @@
-from django import forms, VERSION as django_version
-from django.template.loader import get_template
+from django import forms
 from django import template
 from django.forms import BoundField
+from django.template.loader import get_template
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
+
+
+@register.simple_tag
+def font_awesome():
+    """
+    The latest FontAwesome CDN link.
+    """
+    cdn_link = (
+        '<link rel="stylesheet" '
+        'href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" '
+        'integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" '
+        'crossorigin="anonymous">'
+    )
+    return mark_safe(cdn_link)
 
 
 @register.filter
@@ -22,7 +37,6 @@ def bulma_inline(element):
 
 @register.filter
 def bulma_horizontal(element, label_cols='is-2'):
-
     markup_classes = {'label': label_cols, 'value': '', 'single_value': ''}
 
     for cl in label_cols.split(' '):
@@ -50,7 +64,7 @@ def bulma_horizontal(element, label_cols='is-2'):
 @register.filter
 def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
-       and not is_radio(field) and not is_file(field):
+            and not is_radio(field) and not is_file(field):
         field_classes = field.field.widget.attrs.get('class', '')
         field_classes += ' control'
         field.field.widget.attrs['class'] = field_classes
