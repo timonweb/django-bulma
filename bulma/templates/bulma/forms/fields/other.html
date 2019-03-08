@@ -1,0 +1,10 @@
+{% load bulma_tags %}
+
+{% include 'bulma/forms/field_label.html' %}
+
+<div class="control {{ classes.value }}">
+  {{ field }}
+
+  {% include 'bulma/forms/field_errors.html' %}
+  {% include 'bulma/forms/field_help.html' %}
+</div>

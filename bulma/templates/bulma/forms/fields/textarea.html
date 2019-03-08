@@ -1,0 +1,9 @@
+{% load bulma_tags %}
+
+<label class="label {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
+
+<div class="control {{ classes.value }}">
+  {{ field|addclass:'textarea' }}
+  {% include 'bulma/forms/field_errors.html' %}
+  {% include 'bulma/forms/field_help.html' %}
+</div>

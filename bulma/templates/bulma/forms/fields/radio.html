@@ -1,0 +1,13 @@
+{% include 'bulma/forms/field_label.html' %}
+
+<div class="control {{ classes.value }}">
+  {% for choice in field %}
+    <label class="radio {{ classes.label }}">
+      {{ choice.tag }}
+      {{ choice.choice_label }}
+    </label>
+  {% endfor %}
+
+  {% include 'bulma/forms/field_errors.html' %}
+  {% include 'bulma/forms/field_help.html' %}
+</div>

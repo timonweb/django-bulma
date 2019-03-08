@@ -1,148 +1,20 @@
 {% load bulma_tags %}
 <div class="field">
   {% if field|is_checkbox %}
-
-    <div class="control {{ classes.single_value }}">
-      {% if field.auto_id %}
-        <label
-            class="checkbox {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">
-          {{ field }} {{ field.label }}
-        </label>
-      {% endif %}
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-
-      {% if field.help_text %}
-        <p class="help">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/checkbox.html" %}
+  {% elif field|is_multiple_checkbox %}
+    {% include "bulma/forms/fields/multiple_checkbox.html" %}
   {% elif field|is_radio %}
-
-    {% if field.auto_id %}
-      <label class="label {{ classes.label }}
-          {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-    {% endif %}
-    <div class="control {{ classes.value }}">
-      {% for choice in field %}
-        <label class="radio {{ classes.label }}">
-          {{ choice.tag }}
-          {{ choice.choice_label }}
-        </label>
-      {% endfor %}
-
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-
-      {% if field.help_text %}
-        <p class="help">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/radio.html" %}
   {% elif field|is_input %}
-
-    <label class="label {{ classes.label }}
-        {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-    <div class="control {{ classes.value }}">
-      {{ field|addclass:'input' }}
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-      {% if field.help_text %}
-        <p class="help">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/input.html" %}
   {% elif field|is_textarea %}
-
-    <label class="label {{ classes.label }}
-        {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-    <div class="control {{ classes.value }}">
-      {{ field|addclass:'textarea' }}
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-      {% if field.help_text %}
-        <p class="help">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/textarea.html" %}
   {% elif field|is_select %}
-
-    <label class="label {{ classes.label }}
-        {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-    <div class="control {{ classes.value }}">
-      <span class="select{% if field|is_multiple_select %} is-multiple{% endif %}{% if field.errors|length > 0 %} is-danger{% endif %}">
-        {{ field }}
-      </span>
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-      {% if field.help_text %}
-        <p class="help">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/select.html" %}
   {% elif field|is_file %}
-
-    <label class="label {{ classes.label }}
-        {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-    <div class="control {{ classes.value }}">
-
-      <label class="file-label">
-        {{ field|addclass:'file-input' }}
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fa fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
-      </label>
-
-      {% for error in field.errors %}
-          <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-        {% endfor %}
-        {% if field.help_text %}
-          <p class="help">
-            {{ field.help_text|safe }}
-          </p>
-        {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/file.html" %}
   {% else %}
-
-    {% if field.auto_id %}
-      <label class="label {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}"
-             for="{{ field.auto_id }}">{{ field.label }}</label>
-    {% endif %}
-
-    <div class="control {{ classes.value }} {% if field|is_multiple_checkbox %}multiple-checkbox{% endif %}">
-      {{ field }}
-
-      {% for error in field.errors %}
-        <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
-      {% endfor %}
-
-      {% if field.help_text %}
-        <p class="help-block">
-          {{ field.help_text|safe }}
-        </p>
-      {% endif %}
-    </div>
-
+    {% include "bulma/forms/fields/other.html" %}
   {% endif %}
 </div>

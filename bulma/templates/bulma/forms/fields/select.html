@@ -1,0 +1,13 @@
+{% load bulma_tags %}
+
+{% include 'bulma/forms/field_label.html' %}
+
+<div class="control {{ classes.value }}">
+      <span
+          class="select{% if field|is_multiple_select %} is-multiple{% endif %}{% if field.errors|length > 0 %} is-danger{% endif %}">
+        {{ field }}
+      </span>
+
+  {% include 'bulma/forms/field_errors.html' %}
+  {% include 'bulma/forms/field_help.html' %}
+</div>
