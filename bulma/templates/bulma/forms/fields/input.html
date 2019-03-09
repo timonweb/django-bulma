@@ -1,10 +1,6 @@
+{% extends "bulma/forms/field.html" %}
 {% load bulma_tags %}
 
-{% include 'bulma/forms/field_label.html' %}
-
-<div class="control {{ classes.value }}">
+{% block control %}
   {{ field|addclass:'input' }}
-  {% include 'bulma/forms/field_icons.html' %}
-  {% include 'bulma/forms/field_errors.html' %}
-  {% include 'bulma/forms/field_help.html' %}
-</div>
+{% endblock control %}}

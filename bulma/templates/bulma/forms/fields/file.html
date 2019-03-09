@@ -1,12 +1,10 @@
+{% extends "bulma/forms/field.html" %}
 {% load bulma_tags %}
 
-{% include 'bulma/forms/field_label.html' %}
-
-<div class="control {{ classes.value }}">
-
-  <label class="file-label">
-    {{ field|addclass:'file-input' }}
-    <span class="file-cta">
+{% block control %}
+<label class="file-label">
+  {{ field|addclass:'file-input' }}
+  <span class="file-cta">
           <span class="file-icon">
             <i class="fa fa-upload"></i>
           </span>
@@ -14,9 +12,5 @@
             Choose a file…
           </span>
         </span>
-  </label>
-
-  {% include 'bulma/forms/field_icons.html' %}
-  {% include 'bulma/forms/field_errors.html' %}
-  {% include 'bulma/forms/field_help.html' %}
-</div>
+</label>
+{% endblock control %}

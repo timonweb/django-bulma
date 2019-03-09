@@ -7,28 +7,21 @@ from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 
 register = template.Library()
-
 BULMA_COLUMN_COUNT = 1
 
 
 @register.simple_tag
 def bulma_inline(element, **kwargs):
     kwargs['inline'] = True
-    return bulma_tag(element, **kwargs)
+    return bulma(element, **kwargs)
 
 
 @register.simple_tag
-def bulma_addon(element, **kwargs):
-    kwargs['is_addon'] = True
-    return bulma_tag(element, **kwargs)
-
-
-@register.simple_tag(name="bulma")
-def bulma_tag(
+def bulma(
         element,
         size=None,
         inline=False,
-        is_addon=False,
+        wrap_with_field=True,
         icon_left=None,
         icon_left_size=None,
         icon_right=None,
@@ -39,7 +32,7 @@ def bulma_tag(
     markup_classes = {
         'label': '',
         'field': css_class or '',
-        'value': control_css_class or '',
+        'control': control_css_class or '',
         'input': size or '',
         'single_value': '',
         'icon_left': icon_left,
@@ -48,16 +41,16 @@ def bulma_tag(
         'icon_right_size': 'is-' + (icon_right_size or 'small'),
     }
     if icon_left:
-        markup_classes['value'] += ' has-icons-left'
+        markup_classes['control'] += ' has-icons-left'
     if icon_right:
-        markup_classes['value'] += ' has-icons-right'
-    if inline or is_addon:
+        markup_classes['control'] += ' has-icons-right'
+    if inline:
         markup_classes['label'] = 'sr-only'
 
     return render(
         element,
         markup_classes=markup_classes,
-        is_addon=is_addon
+        wrap_with_field=wrap_with_field
     )
 
 
@@ -75,21 +68,21 @@ def font_awesome():
     return mark_safe(cdn_link)
 
 
-@register.filter
-def bulma(element):
-    markup_classes = {'label': '', 'value': '', 'single_value': ''}
-    return render(element, markup_classes=markup_classes)
+@register.filter(name="bulma")
+def bulma_deprecated(element):
+    markup_classes = {'label': '', 'control': '', 'single_value': ''}
+    return render(element, markup_classes=markup_classes, wrap_with_field=True)
 
 
-@register.filter
-def bulma_inline(element):
-    markup_classes = {'label': 'sr-only', 'value': '', 'single_value': ''}
-    return render(element, markup_classes=markup_classes)
+@register.filter(name="bulma_inline")
+def bulma_inline_deprecated(element):
+    markup_classes = {'label': 'sr-only', 'control': '', 'single_value': ''}
+    return render(element, markup_classes=markup_classes, wrap_with_field=True)
 
 
-@register.filter
-def bulma_horizontal(element, label_cols='is-2'):
-    markup_classes = {'label': label_cols, 'value': '', 'single_value': ''}
+@register.filter(name="bulma_horizontal")
+def bulma_horizontal_deprecated(element, label_cols='is-2'):
+    markup_classes = {'label': label_cols, 'control': '', 'single_value': ''}
 
     for cl in label_cols.split(' '):
         splitted_class = cl.split('-')
@@ -110,22 +103,14 @@ def bulma_horizontal(element, label_cols='is-2'):
 
         markup_classes['value'] += ' ' + '-'.join(splitted_class)
 
-    return render(element, markup_classes=markup_classes)
-
-
-@register.filter
-def bulma_addon(element):
-    return render(element, has_field_div=False)
+    return render(element, markup_classes=markup_classes, wrap_with_field=True)
 
 
 @register.filter
 def add_input_classes(field, size=None):
-    # if not is_checkbox(field) and not is_multiple_checkbox(field) \
-    #         and not is_radio(field) and not is_file(field):
-    #     field_classes = field.field.widget.attrs.get('class', '')
-    #     field_classes += ' control'
-    #     field.field.widget.attrs['class'] = field_classes
     field_classes = field.field.widget.attrs.get('class', '')
+    if len(field.errors) > 0:
+        field_classes += ' is-danger'
     if size:
         field_classes += " is-" + size
     field.field.widget.attrs['class'] = field_classes
@@ -133,16 +118,16 @@ def add_input_classes(field, size=None):
 
 def render(element, **kwargs):
     markup_classes = kwargs.pop('markup_classes', {})
-    is_addon = kwargs.pop('is_addon', False)
+    wrap_with_field = kwargs.pop('wrap_with_field', True)
 
-    template_name = "bulma/forms/field.html"
+    template_name = "bulma/forms/fields.html"
     if isinstance(element, BoundField):
         add_input_classes(element, markup_classes.get('input', ''))
         context = {
             'field': element,
             'classes': markup_classes,
             'form': element.form,
-            'is_addon': is_addon
+            'wrap_with_field': wrap_with_field
         }
     else:
         has_management = getattr(element, 'management_form', None)
@@ -152,13 +137,13 @@ def render(element, **kwargs):
                     add_input_classes(field)
 
             template_name = "bulma/forms/formset.html"
-            context = {'formset': element, 'classes': markup_classes}
+            context = {'formset': element, 'classes': markup_classes, 'wrap_with_field': wrap_with_field}
         else:
             for field in element.visible_fields():
                 add_input_classes(field)
 
             template_name = "bulma/forms/form.html"
-            context = {'form': element, 'classes': markup_classes}
+            context = {'form': element, 'classes': markup_classes, 'wrap_with_field': wrap_with_field}
 
     return get_template(template_name).render(context)
 
@@ -216,9 +201,8 @@ def is_file(field):
 
 @register.filter
 def addclass(field, css_class):
-    if len(field.errors) > 0:
-        css_class += ' is-danger'
-    return field.as_widget(attrs={"class": field.field.widget.attrs['class'] + ' ' + css_class})
+    field.field.widget.attrs['class'] += ' ' + css_class
+    return field
 
 
 @register.filter
@@ -242,11 +226,15 @@ def _bulma_group_addons(parser, token, end_token, main_css_class):
     tag_name, arg = token.contents.split(None, 1)
     group_kwargs = {arg_val.split("=")[0]: arg_val.split("=")[1].lstrip('"').rstrip('"') for arg_val in arg.split(" ")}
     group_kwargs['css_class'] = f"{main_css_class} {group_kwargs.get('css_class')}"
+
     nodelist = parser.parse((end_token,))
     parser.delete_first_token()
+
     for node in nodelist:
-        if isinstance(node, SimpleNode) and node.func is bulma_tag:
-            node.kwargs['is_addon'] = FilterExpression('True', parser)
+        if isinstance(node, SimpleNode) and node.func in [bulma, bulma_inline]:
+            node.kwargs['wrap_with_field'] = FilterExpression('False', parser)
+            node.kwargs['inline'] = FilterExpression('True', parser)
+
     return GroupNode(nodelist, group_kwargs)
 
 

@@ -1,10 +1,4 @@
+{% extends "bulma/forms/field.html" %}
 {% load bulma_tags %}
 
-{% include 'bulma/forms/field_label.html' %}
-
-<div class="control {{ classes.value }} multiple-checkbox">
-  {{ field }}
-  {% include 'bulma/forms/field_icons.html' %}
-  {% include 'bulma/forms/field_errors.html' %}
-  {% include 'bulma/forms/field_help.html' %}
-</div>
+{% block control_class %}multiple-checkbox{% endblock control_class %}
