@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "django-bulma"
+version = "0.5.7"
+description = "Bulma CSS Framework for Django projects"
+authors = ["Tim Kamanin <tim@timonweb.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://timonweb.com"
+keywords = ["django", "css", "bulma", "theme"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.6",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "Environment :: Web Environment",
+    "Framework :: Django"
+]
+packages = [
+    { include = "bulma" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
