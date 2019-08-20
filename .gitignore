@@ -138,8 +138,8 @@ Temporary Items
 
 # Example project
 demo/static/bulma
-demo/bulma
-db.sqlite3
+bulma/tests/static
+demo/memory
 
 node_modules
 

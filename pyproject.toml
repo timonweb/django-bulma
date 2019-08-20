@@ -24,6 +24,8 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
+django = "^2.2"
+pytest-django = "^3.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
