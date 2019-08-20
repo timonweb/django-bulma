@@ -1,7 +1,7 @@
 update_bulma:
 	cd ./bulma/static/bulma/sass && rm package-lock.json && npm i && npm run build && rm -rf ./node_modules
 test:
-	pytest bulma
+	PYTHONPATH=`pwd` pytest bulma
 build:
 	test && poetry build
 demosite:

@@ -1,5 +1,5 @@
 [[package]]
-category = "main"
+category = "dev"
 description = "Atomic file writes."
 name = "atomicwrites"
 optional = false
@@ -7,7 +7,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.3.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Classes Without Boilerplate"
 name = "attrs"
 optional = false
@@ -15,7 +15,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "19.1.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Cross-platform colored terminal text."
 marker = "sys_platform == \"win32\""
 name = "colorama"
@@ -24,7 +24,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.4.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 name = "django"
 optional = false
@@ -36,7 +36,7 @@ pytz = "*"
 sqlparse = "*"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
 optional = false
@@ -47,7 +47,7 @@ version = "0.19"
 zipp = ">=0.5"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
@@ -55,7 +55,7 @@ python-versions = ">=3.4"
 version = "7.2.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "plugin and hook calling mechanisms for python"
 name = "pluggy"
 optional = false
@@ -66,7 +66,7 @@ version = "0.12.0"
 importlib-metadata = ">=0.12"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
 name = "py"
 optional = false
@@ -74,7 +74,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.8.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
@@ -92,7 +92,7 @@ setuptools = "*"
 six = ">=1.10.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A Django plugin for pytest."
 name = "pytest-django"
 optional = false
@@ -103,7 +103,7 @@ version = "3.5.1"
 pytest = ">=3.6"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -111,7 +111,7 @@ python-versions = "*"
 version = "2019.2"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -119,7 +119,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*"
 version = "1.12.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Non-validating SQL parser"
 name = "sqlparse"
 optional = false
@@ -127,7 +127,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.3.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 name = "zipp"
 optional = false
@@ -135,7 +135,7 @@ python-versions = ">=2.7"
 version = "0.5.2"
 
 [metadata]
-content-hash = "7a2208a5109d0d408759ffe1120dcbf429c4b0338be4fab1bd6b96d3337af022"
+content-hash = "9a4cbab1be845816c46d74da6ef029fdc2de3841f8dabc1efc0af2222f7a68e0"
 python-versions = "^3.6"
 
 [metadata.hashes]
