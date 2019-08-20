@@ -37,12 +37,10 @@ COLOR_CHOICES = (
         'type': 'password'
     }),
     (forms.ChoiceField(choices=[]), "Select", 'select', {
-        'name': 'input',
-        'class': ['control']
+        'name': 'input'
     }),
     (forms.MultipleChoiceField(choices=[]), "Multi select", 'select', {
         'name': 'input',
-        'class': ['control'],
         'multiple': ""
     }),
     (forms.CharField(widget=forms.Textarea()), "Textarea", 'textarea', {

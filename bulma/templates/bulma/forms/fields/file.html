@@ -5,12 +5,21 @@
 <label class="file-label">
   {{ field|addclass:'file-input' }}
   <span class="file-cta">
-          <span class="file-icon">
-            <i class="fa fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
+
+    <span class="icon file-icon is-{{ icon_left_size }} is-left">
+      {% if classes.icon_left %}
+        <i class="{{ classes.icon_left }}"></i>
+      {% else %}
+        <i class="fa fa-upload"></i>
+      {% endif %}
+    </span>
+
+    <span class="file-label">
+      Choose a file…
+    </span>
+  </span>
 </label>
 {% endblock control %}
+
+{% block icon_left %}{% endblock icon_left %}
+{% block icon_right %}{% endblock icon_right %}

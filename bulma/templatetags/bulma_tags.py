@@ -116,6 +116,14 @@ def add_input_classes(field, size=None):
     field.field.widget.attrs['class'] = field_classes
 
 
+def preprocess_markup_classes(markup_classes, bound_field):
+    if any([is_file(bound_field), is_textarea(bound_field)]):
+        markup_classes['control'] = markup_classes.get('control', '').replace('has-icons-left', '')
+        markup_classes['control'] = markup_classes.get('control', '').replace('has-icons-right', '')
+        markup_classes['control'] = markup_classes.get('control', '').strip()
+    return markup_classes
+
+
 def render(element, **kwargs):
     markup_classes = kwargs.pop('markup_classes', {})
     wrap_with_field = kwargs.pop('wrap_with_field', True)
@@ -125,7 +133,7 @@ def render(element, **kwargs):
         add_input_classes(element, markup_classes.get('input', ''))
         context = {
             'field': element,
-            'classes': markup_classes,
+            'classes': preprocess_markup_classes(markup_classes, element),
             'form': element.form,
             'wrap_with_field': wrap_with_field
         }

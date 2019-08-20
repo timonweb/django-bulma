@@ -10,9 +10,13 @@
     {{ field }}
     {% endblock control %}
 
-    {% block icons %}
-    {% include 'bulma/forms/field_icons.html' %}
-    {% endblock icons %}
+    {% block icon_left %}
+    {% include 'bulma/forms/field_icon_left.html' %}
+    {% endblock icon_left %}
+
+    {% block icon_right %}
+    {% include 'bulma/forms/field_icon_right.html' %}
+    {% endblock icon_right %}
 
     {% block errors %}
     {% include 'bulma/forms/field_errors.html' %}
