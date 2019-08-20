@@ -29,6 +29,7 @@ python = "^3.6"
 pytest = "^3.0"
 django = "^2.2"
 pytest-django = "^3.5"
+beautifulsoup4 = "^4.8"
 
 [build-system]
 requires = ["poetry>=0.12"]

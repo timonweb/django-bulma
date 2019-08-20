@@ -22,8 +22,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
 )
 
-ROOT_URLCONF = 'crispy_forms.tests.urls'
-CRISPY_CLASS_CONVERTERS = {"textinput": "textinput textInput inputtext"}
+ROOT_URLCONF = 'bulma.tests.urls'
+
 SECRET_KEY = 'secretkey'
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -56,3 +56,5 @@ TEMPLATES = [
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+STATIC_URL = '/static/'
