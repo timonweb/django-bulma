@@ -3,6 +3,6 @@ update_bulma:
 test:
 	PYTHONPATH=`pwd` pytest bulma
 build:
-	test && poetry build
+	make test && poetry build
 demosite:
 	cd ./demo && pip install -r requirements.txt && python manage.py migrate && python manage.py runserver
