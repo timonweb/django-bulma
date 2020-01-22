@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Tim Kamanin",
+    "email": "tim@timonweb.com",
+    "url": "http://timonweb.com"
+  },
+  "description": "Bulma for Django",
+  "dependencies": {
+    "bulma": "0.7.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.5.1",
+    "clean-css-cli": "^4.3.0",
+    "node-sass": "^4.12.0",
+    "postcss-cli": "^6.1.2",
+    "rimraf": "^2.6.3"
+  },
+  "license": "MIT",
+  "main": "style.sass",
+  "style": "../css/style.min.css",
+  "name": "django_bulma",
+  "scripts": {
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix && npm run build-cleancss",
+    "build-autoprefix": "postcss --use autoprefixer --map false --output ../css/style.css ../css/style.css",
+    "build-cleancss": "cleancss -o ../css/style.min.css ../css/style.css",
+    "build-clean": "rimraf css",
+    "build-sass": "node-sass --output-style expanded --source-map true style.sass ../css/style.css",
+    "deploy": "npm run build",
+    "start": "npm run build-sass -- --watch"
+  }
+}

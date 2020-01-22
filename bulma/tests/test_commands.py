@@ -4,9 +4,9 @@ from io import StringIO
 import pytest
 from django.core.management import call_command, CommandError
 
-from bulma.tests.test_settings import STATICFILES_DIRS
+from django.conf import settings
 
-BULMA_STATIC_DIR = os.path.join(STATICFILES_DIRS[0], 'bulma')
+BULMA_STATIC_DIR = os.path.join(settings.STATICFILES_DIRS[0], 'bulma')
 
 
 def test_bulma_command_without_second_argument_displays_command_error_message():

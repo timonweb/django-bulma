@@ -1,3 +1,9 @@
+import os
+
+BASE_DIR = os.path.dirname(__file__)
+
+SECRET_KEY = "007"
+
 INSTALLED_APPS = [
     # Default Django apps
     "django.contrib.admin",
@@ -6,14 +12,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.gis",
 
     # Our tests
     "bulma",
-    #"testapp",
 ]
 
-ROOT_URLCONF = "testapp.urls"
+ROOT_URLCONF = "test_project.urls"
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
 
@@ -25,9 +29,16 @@ MIDDLEWARE = (
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

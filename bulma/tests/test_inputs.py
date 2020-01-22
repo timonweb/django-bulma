@@ -1,7 +1,7 @@
 import pytest
 from django import forms
 
-from bulma.tests.utils import render_form, get_dom, element_has_all_attributes
+from .utils import render_form, get_dom, element_has_all_attributes
 
 COLOR_CHOICES = (
     ('red', 'Red'),
