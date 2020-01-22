@@ -83,7 +83,6 @@ A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a m
 **django-bulma** comes with:
 * a base template,
 * django core registration templates,
-* django-allauth account templates.
 
 ## Bugs and suggestions
 
