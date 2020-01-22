@@ -2,18 +2,18 @@
   "author": {
     "name": "Tim Kamanin",
     "email": "tim@timonweb.com",
-    "url": "http://timonweb.com"
+    "url": "https://timonweb.com"
   },
   "description": "Bulma for Django",
   "dependencies": {
-    "bulma": "0.7.5"
+    "bulma": "0.8.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.5.1",
+    "autoprefixer": "^9.7.4",
     "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.12.0",
-    "postcss-cli": "^6.1.2",
-    "rimraf": "^2.6.3"
+    "node-sass": "^4.13.1",
+    "postcss-cli": "^7.1.0",
+    "rimraf": "^3.0.0"
   },
   "license": "MIT",
   "main": "style.sass",

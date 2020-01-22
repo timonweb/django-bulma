@@ -8,6 +8,11 @@ shared: &shared
   steps:
     - checkout
 
+    - run:
+        name: install npm
+        command: |
+          sudo apt-get install nodejs
+
     # Download and cache dependencies
     - restore_cache:
         keys:
@@ -33,7 +38,6 @@ shared: &shared
     - store_artifacts:
         path: test-reports
         destination: test-reports
-
 
 jobs:
   "python-3.7":
