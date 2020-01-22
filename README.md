@@ -39,9 +39,7 @@ A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a m
     python manage.py copy_bulma_static_into_project
     ```  
     You should see **bulma** dir appeared in your **STATIC_ROOT**. It contains
-    three dirs:
-    * **lib** - where we put original and untouched bulma package, in most cases
-    you shouldn't mess with it
+    two dirs:
     * **sass** - this is the place where you can put your own sass code and customize
     bulma variables
     * **css** - this is where compiled sass output goes, you should link this file
