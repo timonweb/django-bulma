@@ -1,5 +1,7 @@
 import os
 
+ALLOWED_HOSTS = ['*']
+
 BASE_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = "007"
@@ -13,8 +15,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Our tests
     "bulma",
+    "showcase"
 ]
 
 ROOT_URLCONF = "test_project.urls"

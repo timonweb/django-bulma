@@ -21,7 +21,7 @@ from django.contrib.auth.views import LoginView
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^accounts/', include('allauth.urls')),
+    #url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^showcase/', include('showcase.urls', namespace='showcase')),
 ]

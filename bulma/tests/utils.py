@@ -37,9 +37,11 @@ def get_dom(html):
 
 def element_has_all_attributes(element, attributes):
     for attribute_name, attribute_value in attributes.items():
-        if not element_has_attribute(element, attribute_name, attribute_value):
-            return False
-    return True
+        assert element.has_attr(attribute_name) is True
+        print(element.get(attribute_name))
+        assert element.get(attribute_name) == attribute_value, f'Element {element} has attribute "{attribute_name}" with value {attribute_value}'
+            #return False
+    #return True
 
 
 def element_has_attribute(element, attribute_name, attribute_value):
