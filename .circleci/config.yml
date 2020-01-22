@@ -9,9 +9,11 @@ shared: &shared
     - checkout
 
     - run:
-        name: install npm
+        name: install node & npm
         command: |
           sudo apt-get install nodejs
+          node -v
+          npm -v
 
     # Download and cache dependencies
     - restore_cache:
