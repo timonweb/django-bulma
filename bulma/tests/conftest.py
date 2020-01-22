@@ -1,14 +1,12 @@
 import os
-import shutil
-
 import pytest
-
-from bulma.tests.test_settings import STATICFILES_DIRS
+import shutil
+from django.conf import settings
 
 
 @pytest.yield_fixture
 def cleanup_static_files():
-    static_files_dir = STATICFILES_DIRS[0]
+    static_files_dir = settings.STATICFILES_DIRS[0]
     if os.path.isdir(static_files_dir):
         shutil.rmtree(static_files_dir)
     yield

@@ -1,7 +1,7 @@
 import pytest
 from django import forms
 
-from bulma.tests.utils import render_form, get_dom, element_has_all_attributes
+from .utils import render_form, get_dom, element_has_all_attributes
 
 COLOR_CHOICES = (
     ('red', 'Red'),
@@ -13,27 +13,27 @@ COLOR_CHOICES = (
 @pytest.mark.parametrize("field,label,tag,attributes", [
     (forms.CharField(), "Name", 'input', {
         'name': 'input',
-        'class': ['input'],
+        'class': ['control', 'input'],
         'type': 'text'
     }),
     (forms.EmailField(), "Email", 'input', {
         'name': 'input',
-        'class': ['input'],
+        'class': ['control', 'input'],
         'type': 'email'
     }),
     (forms.CharField(widget=forms.NumberInput()), "Email", 'input', {
         'name': 'input',
-        'class': ['input'],
+        'class': ['control', 'input'],
         'type': 'number'
     }),
     (forms.CharField(widget=forms.URLInput()), "Url", 'input', {
         'name': 'input',
-        'class': ['input'],
+        'class': ['control', 'input'],
         'type': 'url'
     }),
     (forms.CharField(widget=forms.PasswordInput()), "Password", 'input', {
         'name': 'input',
-        'class': ['input'],
+        'class': ['control', 'input'],
         'type': 'password'
     }),
     (forms.ChoiceField(choices=[]), "Select", 'select', {
@@ -45,7 +45,7 @@ COLOR_CHOICES = (
     }),
     (forms.CharField(widget=forms.Textarea()), "Textarea", 'textarea', {
         'name': 'input',
-        'class': ['textarea']
+        'class': ['control', 'textarea']
     }),
     (forms.BooleanField(), "Checkbox", 'input', {
         'name': 'input',
@@ -84,5 +84,5 @@ def test_input_rendering(field, tag, label, attributes):
     output = render_form(TestForm())
     dom = get_dom(output)
 
-    assert element_has_all_attributes(dom.find(tag), attributes), f"{label} has attributes {str(attributes)}"
+    element_has_all_attributes(dom.find(tag), attributes), f"{label} has attributes {str(attributes)}"
     assert dom.find('label').text.strip() == label, f"Field has label {label}"

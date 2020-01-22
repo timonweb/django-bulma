@@ -107,18 +107,6 @@
               Login
             </a>
           {% endif %}
-          {% url 'account_login' as login_url %}
-          {% if login_url %}
-            <a class="navbar-item is-hidden-desktop-only" href="{{ login_url }}">
-              Login (allauth)
-            </a>
-          {% endif %}
-          {% url 'account_signup' as signup_url %}
-          {% if signup_url %}
-            <a class="navbar-item is-hidden-desktop-only" href="{{ signup_url }}">
-              Signup (allauth)
-            </a>
-          {% endif %}
         </div>
       </div>
     </nav>

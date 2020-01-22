@@ -209,8 +209,11 @@ def is_file(field):
 
 @register.filter
 def addclass(field, css_class):
-    field.field.widget.attrs['class'] += ' ' + css_class
-    return field
+    if len(field.errors) > 0:
+        css_class += ' is-danger'
+    field_classes = field.field.widget.attrs.get('class', '')
+    field_classes += f' {css_class}'
+    return field.as_widget(attrs={"class": field_classes})
 
 
 @register.filter
