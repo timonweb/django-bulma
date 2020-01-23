@@ -6,6 +6,8 @@ from django.template.library import SimpleNode
 from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 
+from bulma.utils import css_class_string
+
 register = template.Library()
 BULMA_COLUMN_COUNT = 1
 
@@ -22,6 +24,7 @@ def bulma(
         size=None,
         inline=False,
         wrap_with_field=True,
+        is_horizontal=False,
         icon_left=None,
         icon_left_size=None,
         icon_right=None,
@@ -30,22 +33,29 @@ def bulma(
         control_css_class=None
 ):
     markup_classes = {
-        'label': '',
-        'field': css_class or '',
-        'control': control_css_class or '',
-        'input': size or '',
+        'label': css_class_string(
+            'sr-only' if inline else None
+        ),
+        'field': css_class_string(
+            css_class,
+            'is-horizontal' if is_horizontal else None
+        ),
+        'control': css_class_string(
+            control_css_class,
+            'has-icons-left' if icon_left else None,
+            'has-icons-right' if icon_right else None,
+        ),
+        'input': css_class_string(size),
         'single_value': '',
-        'icon_left': icon_left,
-        'icon_left_size': 'is-' + (icon_left_size or 'small'),
-        'icon_right': icon_right,
-        'icon_right_size': 'is-' + (icon_right_size or 'small'),
+        'icon_left': css_class_string(icon_left),
+        'icon_left_size':  css_class_string(
+            f'is-{icon_left_size}' if icon_left_size or 'is-small'
+        ),
+        'icon_right': css_class_string(icon_right),
+        'icon_right_size': css_class_string(
+            f'is-{icon_right_size}' if icon_right_size or 'is-small'
+        ),
     }
-    if icon_left:
-        markup_classes['control'] += ' has-icons-left'
-    if icon_right:
-        markup_classes['control'] += ' has-icons-right'
-    if inline:
-        markup_classes['label'] = 'sr-only'
 
     return render(
         element,

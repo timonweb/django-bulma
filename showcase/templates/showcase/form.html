@@ -2,6 +2,7 @@
 {% load bulma_tags %}
 
 {% block content %}
+
   <div class="section">
     <h2 class="title">All inputs</h2>
     <form method="post" enctype="multipart/form-data" action="{% url 'showcase:form' %}" novalidate>
@@ -10,12 +11,14 @@
       <button class="button is-primary">Submit</button>
     </form>
   </div>
+
   <div class="section">
     <h2 class="title">Inline (no label)</h2>
-    {{ form.text|bulma_inline }}
-    {{ form.checkboxes|bulma_inline }}
-    {{ form.file|bulma_inline }}
+    {% bulma form.text inline=True %}
+    {% bulma form.checkboxes inline=True %}
+    {% bulma form.file inline=True %}
   </div>
+
   <div class="section">
     <h2 class="title">Inputs with icons</h2>
     {% bulma form.text icon_left="far fa-user" icon_right="far fa-arrow-alt-circle-right" %}
@@ -30,5 +33,12 @@
       {% bulma form.text icon_left="far fa-user" icon_right="far fa-arrow-alt-circle-right" %}
       {% bulma form.select icon_left="far fa-user" %}
     {% endbulma_addons %}
+
+    <div class="field has-addons has-addons-centered">
+      {% bulma form.text inline=True wrap_with_field=False icon_left="far fa-user" icon_right="far fa-arrow-alt-circle-right" %}
+      {% bulma form.select inline=True wrap_with_field=False icon_left="far fa-user" %}
+    </div>
+
   </div>
+
 {% endblock %}
