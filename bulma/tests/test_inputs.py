@@ -13,27 +13,27 @@ COLOR_CHOICES = (
 @pytest.mark.parametrize("field,label,tag,attributes", [
     (forms.CharField(), "Name", 'input', {
         'name': 'input',
-        'class': ['control', 'input'],
+        'class': ['input'],
         'type': 'text'
     }),
     (forms.EmailField(), "Email", 'input', {
         'name': 'input',
-        'class': ['control', 'input'],
+        'class': ['input'],
         'type': 'email'
     }),
-    (forms.CharField(widget=forms.NumberInput()), "Email", 'input', {
+    (forms.CharField(widget=forms.NumberInput()), "Age", 'input', {
         'name': 'input',
-        'class': ['control', 'input'],
+        'class': ['input'],
         'type': 'number'
     }),
     (forms.CharField(widget=forms.URLInput()), "Url", 'input', {
         'name': 'input',
-        'class': ['control', 'input'],
+        'class': ['input'],
         'type': 'url'
     }),
     (forms.CharField(widget=forms.PasswordInput()), "Password", 'input', {
         'name': 'input',
-        'class': ['control', 'input'],
+        'class': ['input'],
         'type': 'password'
     }),
     (forms.ChoiceField(choices=[]), "Select", 'select', {
@@ -45,7 +45,7 @@ COLOR_CHOICES = (
     }),
     (forms.CharField(widget=forms.Textarea()), "Textarea", 'textarea', {
         'name': 'input',
-        'class': ['control', 'textarea']
+        'class': ['textarea']
     }),
     (forms.BooleanField(), "Checkbox", 'input', {
         'name': 'input',
