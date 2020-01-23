@@ -7,7 +7,7 @@
     <h2 class="title">All inputs</h2>
     <form method="post" enctype="multipart/form-data" action="{% url 'showcase:form' %}" novalidate>
       {% csrf_token %}
-      {{ form|bulma }}
+      {% bulma form %}
       <button class="button is-primary">Submit</button>
     </form>
   </div>
