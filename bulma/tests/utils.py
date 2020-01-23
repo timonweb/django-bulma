@@ -35,14 +35,12 @@ def get_dom(html):
     return BeautifulSoup(html, 'html.parser')
 
 
-def element_has_all_attributes(element, attributes):
+def assert_element_has_all_attributes(element, attributes):
     for attribute_name, attribute_value in attributes.items():
-        assert element.has_attr(attribute_name) is True
-        print(element.get(attribute_name))
-        assert element.get(attribute_name) == attribute_value, f'Element {element} has attribute "{attribute_name}" with value {attribute_value}'
-            #return False
-    #return True
+        assert_element_has_attribute(element, attribute_name, attribute_value)
 
 
-def element_has_attribute(element, attribute_name, attribute_value):
-    return element.has_attr(attribute_name) and element.get(attribute_name) == attribute_value
+def assert_element_has_attribute(element, attribute_name, attribute_value):
+    assert element.has_attr(attribute_name) is True
+    assert element.get(
+        attribute_name) == attribute_value, f'Element {element} has attribute "{attribute_name}" with value {attribute_value}'

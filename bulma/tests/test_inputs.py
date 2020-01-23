@@ -1,7 +1,7 @@
 import pytest
 from django import forms
 
-from .utils import render_form, get_dom, element_has_all_attributes
+from .utils import render_form, get_dom, assert_element_has_all_attributes
 
 COLOR_CHOICES = (
     ('red', 'Red'),
@@ -84,5 +84,5 @@ def test_input_rendering(field, tag, label, attributes):
     output = render_form(TestForm())
     dom = get_dom(output)
 
-    element_has_all_attributes(dom.find(tag), attributes), f"{label} has attributes {str(attributes)}"
+    assert_element_has_all_attributes(dom.find(tag), attributes), f"{label} has attributes {str(attributes)}"
     assert dom.find('label').text.strip() == label, f"Field has label {label}"
