@@ -30,7 +30,8 @@ def bulma(
         icon_right=None,
         icon_right_size=None,
         css_class=None,
-        control_css_class=None
+        control_css_class=None,
+        field_template=None
 ):
     markup_classes = {
         'label': css_class_string(
@@ -48,7 +49,7 @@ def bulma(
         'input': css_class_string(size),
         'single_value': '',
         'icon_left': css_class_string(icon_left),
-        'icon_left_size':  css_class_string(
+        'icon_left_size': css_class_string(
             f'is-{icon_left_size}' if icon_left_size else 'is-small'
         ),
         'icon_right': css_class_string(icon_right),
@@ -60,7 +61,8 @@ def bulma(
     return render(
         element,
         markup_classes=markup_classes,
-        wrap_with_field=wrap_with_field
+        wrap_with_field=wrap_with_field,
+        field_template=field_template
     )
 
 
@@ -138,7 +140,7 @@ def render(element, **kwargs):
     markup_classes = kwargs.pop('markup_classes', {})
     wrap_with_field = kwargs.pop('wrap_with_field', True)
 
-    template_name = "bulma/forms/fields.html"
+    template_name = kwargs.get("field_template") or "bulma/forms/fields.html"
     if isinstance(element, BoundField):
         add_input_classes(element, markup_classes.get('input', ''))
         context = {
@@ -227,6 +229,13 @@ def addclass(field, css_class):
 
 
 @register.filter
+def attrs(field, attrs):
+    widget_attrs = field.field.widget.attrs or {}
+    field.field.widget.attrs = {**widget_attrs, **tokens_to_dict(attrs)}
+    return field
+
+
+@register.filter
 def bulma_message_tag(tag):
     return {
         'error': 'danger'
@@ -267,3 +276,22 @@ class GroupNode(template.Node):
     def render(self, context):
         output = self.nodelist.render(context)
         return f'<div class="field {self.group_kwargs.get("css_class")}">{output}</div>'
+
+
+def tokens_to_dict(tokens):
+    return {key_value[0]: key_value[1] for key_value in [token_to_tuple(token) for token in tokens.split(',')]}
+
+
+def token_to_tuple(token):
+    [name, value] = token.split('=')
+    return strip_quotes(name), strip_quotes(value)
+
+
+def strip_quotes(text):
+    if not isinstance(text, str):
+        return text
+    if text.startswith('"'):
+        text = text[1:]
+    if text.endswith('"'):
+        text = text[:-1]
+    return text
