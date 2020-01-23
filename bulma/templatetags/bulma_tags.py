@@ -49,11 +49,11 @@ def bulma(
         'single_value': '',
         'icon_left': css_class_string(icon_left),
         'icon_left_size':  css_class_string(
-            f'is-{icon_left_size}' if icon_left_size or 'is-small'
+            f'is-{icon_left_size}' if icon_left_size else 'is-small'
         ),
         'icon_right': css_class_string(icon_right),
         'icon_right_size': css_class_string(
-            f'is-{icon_right_size}' if icon_right_size or 'is-small'
+            f'is-{icon_right_size}' if icon_right_size else 'is-small'
         ),
     }
 
