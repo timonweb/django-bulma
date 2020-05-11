@@ -6,13 +6,13 @@
   },
   "description": "Bulma for Django",
   "dependencies": {
-    "bulma": "0.8.0"
+    "bulma": "~0.8.2"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.7.6",
     "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.13.1",
-    "postcss-cli": "^7.1.0",
+    "node-sass": "^4.14.1",
+    "postcss-cli": "^7.1.1",
     "rimraf": "^3.0.2"
   },
   "license": "MIT",
