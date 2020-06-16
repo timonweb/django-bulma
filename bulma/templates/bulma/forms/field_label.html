@@ -1,0 +1,3 @@
+{% if field.auto_id %}
+  <label for="{{ field.auto_id }}" class="label {{ classes.label }}{% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
+{% endif %}

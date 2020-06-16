@@ -1,0 +1,12 @@
+{% extends "bulma/forms/field.html" %}
+{% load bulma_tags %}
+
+{% block control %}
+  <label
+      class="checkbox {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">
+    {{ field }} {{ field.label }}
+  </label>
+{% endblock %}
+
+{% block icon_left %}{% endblock icon_left %}
+{% block icon_right %}{% endblock icon_right %}
