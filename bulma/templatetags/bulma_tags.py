@@ -11,28 +11,27 @@ from bulma.utils import css_class_string
 register = template.Library()
 BULMA_COLUMN_COUNT = 1
 
+@register.simple_tag
+def bulma_label(field, template_name="bulma/forms/field_label.html"):
+    return get_template(template_name).render({
+        'field': field
+    })
+
 
 @register.simple_tag
-def bulma_inline(element, **kwargs):
-    kwargs['inline'] = True
-    return bulma(element, **kwargs)
-
-
-@register.simple_tag
-def bulma(
-        element,
-        size=None,
-        inline=False,
-        wrap_with_field=True,
-        is_horizontal=False,
-        icon_left=None,
-        icon_left_size=None,
-        icon_right=None,
-        icon_right_size=None,
-        css_class=None,
-        control_css_class=None,
-        field_template=None
-):
+def bulma_field(field,
+                size=None,
+                inline=False,
+                control_only=False,
+                is_horizontal=False,
+                icon_left=None,
+                icon_left_size=None,
+                icon_right=None,
+                icon_right_size=None,
+                css_class=None,
+                control_css_class=None,
+                field_template=None
+                ):
     markup_classes = {
         'label': css_class_string(
             'sr-only' if inline else None
@@ -57,13 +56,18 @@ def bulma(
             f'is-{icon_right_size}' if icon_right_size else 'is-small'
         ),
     }
-
-    return render(
-        element,
+    return render_field(
+        field,
         markup_classes=markup_classes,
-        wrap_with_field=wrap_with_field,
-        field_template=field_template
+        field_template=field_template,
+        control_only=control_only,
+        is_horizontal=is_horizontal
     )
+
+
+@register.simple_tag
+def bulma_form(form):
+    return render_form(form)
 
 
 @register.simple_tag
@@ -83,13 +87,13 @@ def font_awesome():
 @register.filter(name="bulma")
 def bulma_deprecated(element):
     markup_classes = {'label': '', 'control': '', 'single_value': ''}
-    return render(element, markup_classes=markup_classes, wrap_with_field=True)
+    return legacy_render(element, markup_classes=markup_classes, control_only=False)
 
 
 @register.filter(name="bulma_inline")
 def bulma_inline_deprecated(element):
     markup_classes = {'label': 'sr-only', 'control': '', 'single_value': ''}
-    return render(element, markup_classes=markup_classes, wrap_with_field=True)
+    return legacy_render(element, markup_classes=markup_classes, control_only=False)
 
 
 @register.filter(name="bulma_horizontal")
@@ -115,7 +119,7 @@ def bulma_horizontal_deprecated(element, label_cols='is-2'):
 
         markup_classes['value'] += ' ' + '-'.join(splitted_class)
 
-    return render(element, markup_classes=markup_classes, wrap_with_field=True)
+    return legacy_render(element, markup_classes=markup_classes, control_only=False)
 
 
 @register.filter
@@ -136,7 +140,44 @@ def preprocess_markup_classes(markup_classes, bound_field):
     return markup_classes
 
 
-def render(element, **kwargs):
+def render_form(form, **kwargs):
+    markup_classes = kwargs.pop('markup_classes', {})
+    wrap_with_field = kwargs.pop('wrap_with_field', True)
+    has_management = getattr(form, 'management_form', None)
+    if has_management:
+        for formset_member in form.forms:
+            for field in formset_member.visible_fields():
+                add_input_classes(field)
+
+        template_name = "bulma/forms/formset.html"
+        context = {'formset': form, 'classes': markup_classes, 'wrap_with_field': wrap_with_field}
+    else:
+        for field in form.visible_fields():
+            add_input_classes(field)
+
+        template_name = "bulma/forms/form.html"
+        context = {'form': form, 'classes': markup_classes, 'wrap_with_field': wrap_with_field}
+
+    return get_template(template_name).render(context)
+
+
+def render_field(field, **kwargs):
+    context = {}
+    markup_classes = kwargs.pop('markup_classes', {})
+    template_name = kwargs.get("field_template") or "bulma/forms/fields.html"
+    # if isinstance(field, BoundField):
+    add_input_classes(field, markup_classes.get('input', ''))
+    context.update({
+        'field': field,
+        'classes': preprocess_markup_classes(markup_classes, field),
+        'form': field.form,
+        'control_only': kwargs.get('control_only', False),
+        'is_horizontal': kwargs.get('is_horizontal', False),
+    })
+    return get_template(template_name).render(context)
+
+
+def legacy_render(element, **kwargs):
     markup_classes = kwargs.pop('markup_classes', {})
     wrap_with_field = kwargs.pop('wrap_with_field', True)
 

@@ -1,5 +1,4 @@
 {% load bulma_tags %}
-{#{% if wrap_with_field %}<div class="field{% if classes.field_css_class %} {{ classes.field_css_class }}{% endif %}">{% endif %}#}
 {% if field|is_checkbox %}
   {% include "bulma/forms/fields/checkbox.html" %}
 {% elif field|is_multiple_checkbox %}
@@ -17,4 +16,3 @@
 {% else %}
   {% include "bulma/forms/fields/other.html" %}
 {% endif %}
-{#{% if wrap_with_field %}</div>{% endif %}#}

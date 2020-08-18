@@ -1,9 +1,14 @@
-{% if wrap_with_field %}
+{% if control_only is False %}
 <div class="field{% if classes.field_css_class %} {{ classes.field_css_class }}{% endif %}">{% endif %}
 
   {% block label %}
-  {% include 'bulma/forms/field_label.html' %}
+      {% if control_only is False %}
+        {% include 'bulma/forms/field_label.html' %}
+      {% endif %}
   {% endblock label %}
+  {% if is_horizontal %}
+      <div class="field-body"><div class="field">
+  {% endif %}
   <div class="control {{ classes.control }} {% block control_class %}{% endblock control_class %}"
        {% if field.auto_id %}id="{{ field.auto_id }}" {% endif %}>
     {% block control %}
@@ -27,5 +32,9 @@
     {% endblock help %}
   </div>
 
-  {% if wrap_with_field %}
+  {% if is_horizontal %}
+      </div></div>
+  {% endif %}
+
+  {% if control_only is False %}
 </div>{% endif %}
