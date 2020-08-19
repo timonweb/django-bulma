@@ -3,7 +3,7 @@
 
 {% block control %}
   <label
-      class="checkbox {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">
+      class="checkbox {{ css_classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">
     {{ field }} {{ field.label }}
   </label>
 {% endblock %}

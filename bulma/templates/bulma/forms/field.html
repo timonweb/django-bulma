@@ -1,5 +1,5 @@
 {% if control_only is False %}
-<div class="field{% if is_horizontal %} is-horizontal{% endif %}{% if classes.field_css_class %} {{ classes.field_css_class }}{% endif %}">{% endif %}
+<div class="field{% if is_horizontal %} is-horizontal{% endif %}{% if css_classes.field_css_class %} {{ css_classes.field_css_class }}{% endif %}">{% endif %}
 
   {% block label %}
       {% if control_only is False %}
@@ -9,7 +9,7 @@
   {% if is_horizontal %}
       <div class="field-body"><div class="field">
   {% endif %}
-  <div class="control {{ classes.control }} {% block control_class %}{% endblock control_class %}"
+  <div class="control {{ css_classes.control }} {% block control_class %}{% endblock control_class %}"
        {% if field.auto_id %}id="{{ field.auto_id }}" {% endif %}>
     {% block control %}
     {{ field }}

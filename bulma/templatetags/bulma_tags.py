@@ -5,6 +5,7 @@ from django.template.library import SimpleNode
 from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 
+from bulma.types import InputSizesStr
 from bulma.utils import css_class_string
 
 register = template.Library()
@@ -19,51 +20,53 @@ def bulma_label(field, template_name="bulma/forms/field_label.html"):
 @register.simple_tag
 def bulma_field(
     field,
-    size=None,
-    inline=False,
-    control_only=False,
-    is_horizontal=False,
-    icon_left=None,
-    icon_left_size=None,
-    icon_right=None,
-    icon_right_size=None,
-    css_class=None,
-    control_css_class=None,
-    field_template=None,
+    inline: bool = False,
+    control_only: bool = False,
+    is_horizontal: bool = False,
+    field_label_size: str = "is-normal",
+    icon_left: str = None,
+    icon_left_size: str = "is-small",
+    icon_right: str = None,
+    icon_right_size: str = "is-small",
+    field_css_class: str = None,
+    input_css_class: str = None,
+    input_size: InputSizesStr = None,
+    input_state: str = None,
+    input_style: str = None,
+    placeholder: str = None,
+    control_css_class: str = None,
+    field_template: str = None,
 ):
-    markup_classes = {
+    css_classes = {
         "label": css_class_string("sr-only" if inline else None),
-        "field": css_class_string(
-            css_class, "is-horizontal" if is_horizontal else None
-        ),
+        "field_label_size": css_class_string(f"is-{field_label_size}"),
+        "field": css_class_string(field_css_class),
         "control": css_class_string(
             control_css_class,
             "has-icons-left" if icon_left else None,
             "has-icons-right" if icon_right else None,
         ),
-        "input": css_class_string(size),
-        "single_value": "",
+        "input": css_class_string(
+            input_css_class, input_size, input_state, input_style
+        ),
         "icon_left": css_class_string(icon_left),
-        "icon_left_size": css_class_string(
-            f"is-{icon_left_size}" if icon_left_size else "is-small"
-        ),
+        "icon_left_size": css_class_string(f"is-{icon_left_size}"),
         "icon_right": css_class_string(icon_right),
-        "icon_right_size": css_class_string(
-            f"is-{icon_right_size}" if icon_right_size else "is-small"
-        ),
+        "icon_right_size": css_class_string(f"is-{icon_right_size}"),
     }
     return render_field(
         field,
-        markup_classes=markup_classes,
+        css_classes=css_classes,
         field_template=field_template,
         control_only=control_only,
         is_horizontal=is_horizontal,
+        placeholder=placeholder,
     )
 
 
 @register.simple_tag
-def bulma_form(form):
-    return render_form(form)
+def bulma_form(form, is_horizontal=False):
+    return render_form(form, is_horizontal=is_horizontal)
 
 
 @register.simple_tag
@@ -119,13 +122,18 @@ def bulma_horizontal_deprecated(element, label_cols="is-2"):
 
 
 @register.filter
-def add_input_classes(field, size=None):
-    field_classes = field.field.widget.attrs.get("class", "")
-    if len(field.errors) > 0:
-        field_classes += " is-danger"
-    if size:
-        field_classes += " is-" + size
-    field.field.widget.attrs["class"] = field_classes
+def add_input_classes(field, input_css_classes=None):
+    css_classes = field.field.widget.attrs.get("class", "")
+    if input_css_classes:
+        css_classes += f" {input_css_classes}"
+    if len(field.errors) > 0 and "is-danger" not in css_classes:
+        css_classes += " is-danger"
+    field.field.widget.attrs["class"] = css_classes
+
+
+def add_placeholder(field, placeholder):
+    # breakpoint()
+    field.field.widget.attrs["placeholder"] = placeholder
 
 
 def preprocess_markup_classes(markup_classes, bound_field):
@@ -142,28 +150,28 @@ def preprocess_markup_classes(markup_classes, bound_field):
 
 def render_form(form, **kwargs):
     markup_classes = kwargs.pop("markup_classes", {})
-    control_only = kwargs.pop("control_only", False)
+    is_horizontal = kwargs.pop("is_horizontal", False)
     has_management = getattr(form, "management_form", None)
     if has_management:
-        for formset_member in form.forms:
-            for field in formset_member.visible_fields():
-                add_input_classes(field)
+        # for formset_member in form.forms:
+        #     for field in formset_member.visible_fields():
+        #         add_input_classes(field)
 
         template_name = "bulma/forms/formset.html"
         context = {
             "formset": form,
             "classes": markup_classes,
-            "control_only": control_only,
+            "is_horizontal": is_horizontal,
         }
     else:
-        for field in form.visible_fields():
-            add_input_classes(field)
+        # for field in form.visible_fields():
+        #     add_input_classes(field)
 
         template_name = "bulma/forms/form.html"
         context = {
             "form": form,
             "classes": markup_classes,
-            "control_only": control_only,
+            "is_horizontal": is_horizontal,
         }
 
     return get_template(template_name).render(context)
@@ -171,14 +179,16 @@ def render_form(form, **kwargs):
 
 def render_field(field, **kwargs):
     context = {}
-    markup_classes = kwargs.pop("markup_classes", {})
+    css_classes = kwargs.get("css_classes", {})
     template_name = kwargs.get("field_template") or "bulma/forms/fields.html"
-    # if isinstance(field, BoundField):
-    add_input_classes(field, markup_classes.get("input", ""))
+    add_input_classes(field, css_classes.get("input", ""))
+    placeholder = kwargs.get("placeholder", {})
+    if placeholder:
+        add_placeholder(field, placeholder)
     context.update(
         {
             "field": field,
-            "classes": preprocess_markup_classes(markup_classes, field),
+            "css_classes": preprocess_markup_classes(css_classes, field),
             "form": field.form,
             "control_only": kwargs.get("control_only", False),
             "is_horizontal": kwargs.get("is_horizontal", False),
@@ -196,9 +206,9 @@ def legacy_render(element, **kwargs):
         add_input_classes(element, markup_classes.get("input", ""))
         context = {
             "field": element,
-            "classes": preprocess_markup_classes(markup_classes, element),
+            "css_classes": preprocess_markup_classes(markup_classes, element),
             "form": element.form,
-            "wrap_with_field": wrap_with_field,
+            "control_only": not wrap_with_field,
         }
     else:
         has_management = getattr(element, "management_form", None)

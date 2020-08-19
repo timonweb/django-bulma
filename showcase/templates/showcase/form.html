@@ -14,20 +14,25 @@
 
 	<div class="section">
 		<h2 class="title">Inline (no label)</h2>
-		{% bulma_field form.text inline=True %}
+		{% bulma_field form.text inline=True placeholder="Inline and with placeholder" %}
 		{% bulma_field form.checkboxes inline=True %}
 		{% bulma_field form.file inline=True %}
 	</div>
 
     <div class="section">
         <h2 class="title">Horizontal inputs</h2>
-        {% bulma_field form.text is_horizontal=True %}
+        {% bulma_field form.text is_horizontal=True  %}
 		{% bulma_field form.checkboxes is_horizontal=True %}
 		{% bulma_field form.file is_horizontal=True %}
 		{% bulma_field form.select is_horizontal=True %}
 		{% bulma_field form.textarea is_horizontal=True %}
 		{% bulma_field form.radios is_horizontal=True %}
 		{% bulma_field form.checkbox is_horizontal=True %}
+    </div>
+
+    <div class="section">
+        <h2 class="title">Horizontal form</h2>
+        {% bulma_form form is_horizontal=True %}
     </div>
 
 	<div class="section">
@@ -47,6 +52,7 @@
 
 		<div class="field has-addons has-addons-centered">
 			{% bulma_field form.text inline=True control_only=True icon_left="far fa-user" icon_right="far fa-arrow-alt-circle-right" %}
+			{% bulma_field form.select inline=True control_only=True icon_left="far fa-user" %}
 			{% bulma_field form.select inline=True control_only=True icon_left="far fa-user" %}
 		</div>
 	</div>

@@ -1,20 +1,22 @@
+{% load bulma_tags %}
+
 {% if form.non_field_errors %}
-  <div class="message is-danger">
-    <div class="message-header">
-      <button class="delete" aria-label="delete"></button>
+    <div class="message is-danger">
+        <div class="message-header">
+            <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            {% for non_field_error in form.non_field_errors %}
+                {{ non_field_error }}
+            {% endfor %}
+        </div>
     </div>
-    <div class="message-body">
-      {% for non_field_error in form.non_field_errors %}
-        {{ non_field_error }}
-      {% endfor %}
-    </div>
-  </div>
 {% endif %}
 
 {% for field in form.hidden_fields %}
-  {{ field }}
+    {{ field }}
 {% endfor %}
 
 {% for field in form.visible_fields %}
-  {% include 'bulma/forms/fields.html' %}
+    {% bulma_field field is_horizontal=is_horizontal %}
 {% endfor %}
