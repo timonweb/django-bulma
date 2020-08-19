@@ -14,10 +14,21 @@
 
 	<div class="section">
 		<h2 class="title">Inline (no label)</h2>
-		{% bulma_field form.text %}
-		{% bulma_field form.checkboxes %}
+		{% bulma_field form.text inline=True %}
+		{% bulma_field form.checkboxes inline=True %}
 		{% bulma_field form.file inline=True %}
 	</div>
+
+    <div class="section">
+        <h2 class="title">Horizontal inputs</h2>
+        {% bulma_field form.text is_horizontal=True %}
+		{% bulma_field form.checkboxes is_horizontal=True %}
+		{% bulma_field form.file is_horizontal=True %}
+		{% bulma_field form.select is_horizontal=True %}
+		{% bulma_field form.textarea is_horizontal=True %}
+		{% bulma_field form.radios is_horizontal=True %}
+		{% bulma_field form.checkbox is_horizontal=True %}
+    </div>
 
 	<div class="section">
 		<h2 class="title">Inputs with icons</h2>

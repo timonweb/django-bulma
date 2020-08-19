@@ -25,14 +25,18 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<3.9"
-django = ">=2.2,<3.1"
+python = "^3.7"
+django = ">=2.2,<3.2"
 
 [tool.poetry.dev-dependencies]
 pytest-django = "^3.8.0"
 pytest = "^5.3.4"
 tox = "^3.14.3"
 beautifulsoup4 = "^4.8.2"
+flake8 = "^3.8.3"
+isort = "^5.4.2"
+black = "^19.10b0"
+pre-commit = "^2.6.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
