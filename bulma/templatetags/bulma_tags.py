@@ -2,8 +2,8 @@ from django import forms, template
 from django.template.base import FilterExpression
 from django.template.library import SimpleNode
 from django.template.loader import get_template
-from django.utils.safestring import mark_safe
 
+from bulma.conf import get_bulma_setting
 from bulma.types import InputSizesStr
 from bulma.utils import css_class_string
 
@@ -63,6 +63,7 @@ def bulma_field(
         "field": field,
         "widget_attrs": widget_attrs,
         "css_classes": preprocess_markup_classes(css_classes, field),
+        # "css_classes": css_classes,
         "form": field.form,
         "control_only": control_only,
         "is_horizontal": is_horizontal,
@@ -90,18 +91,12 @@ def bulma_form(form, is_horizontal=False):
     return get_template(template_name).render(context)
 
 
-@register.simple_tag
+@register.inclusion_tag("bulma/tags/font_awesome.html")
 def font_awesome():
     """
     The latest FontAwesome CDN link.
     """
-    cdn_link = (
-        '<link rel="stylesheet" '
-        'href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" '
-        'integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" '
-        'crossorigin="anonymous">'
-    )
-    return mark_safe(cdn_link)
+    return {"attrs": get_bulma_setting("fontawesome_link")}
 
 
 def preprocess_markup_classes(markup_classes, bound_field):
