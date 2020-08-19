@@ -3,7 +3,7 @@
 
 {% block control %}
   <span class="select{% if field|is_multiple_select %} is-multiple{% endif %}{% if field.errors|length > 0 %} is-danger{% endif %}">
-    {{ field }}
+    {% render_field_widget field widget_attrs %}
   </span>
 {% endblock control %}
 

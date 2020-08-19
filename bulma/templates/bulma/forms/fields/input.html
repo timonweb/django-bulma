@@ -2,5 +2,5 @@
 {% load bulma_tags %}
 
 {% block control %}
-  {{ field|addclass:'input' }}
+  {% render_field_widget field widget_attrs "input" %}
 {% endblock control %}}

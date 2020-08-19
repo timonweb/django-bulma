@@ -3,7 +3,7 @@
 
 {% block control %}
 Custom textarea template
-{{ field|attrs:'class="textarea is-success"' }}
+    {% render_field_widget field widget_attrs "textarea is-success" %}
 {% endblock control %}
 
 {% block icon_left %}{% endblock icon_left %}

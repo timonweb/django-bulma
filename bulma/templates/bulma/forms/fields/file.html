@@ -3,9 +3,8 @@
 
 {% block control %}
 <label class="file-label">
-  {{ field|addclass:'file-input' }}
+  {% render_field_widget field widget_attrs "file-input" %}
   <span class="file-cta">
-
     <span class="icon file-icon is-{{ icon_left_size }} is-left">
       {% if css_classes.icon_left %}
         <i class="{{ css_classes.icon_left }}"></i>

@@ -2,7 +2,7 @@
 {% load bulma_tags %}
 
 {% block control %}
-{{ field|addclass:'textarea' }}
+    {% render_field_widget field widget_attrs "textarea" %}
 {% endblock control %}
 
 {% block icon_left %}{% endblock icon_left %}

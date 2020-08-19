@@ -4,7 +4,7 @@
 {% block control %}
   <label
       class="checkbox {{ css_classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}">
-    {{ field }} {{ field.label }}
+    {% render_field_widget field widget_attrs %} {{ field.label }}
   </label>
 {% endblock %}
 

@@ -1,5 +1,4 @@
 from django import forms, template
-from django.forms import BoundField
 from django.template.base import FilterExpression
 from django.template.library import SimpleNode
 from django.template.loader import get_template
@@ -9,7 +8,6 @@ from bulma.types import InputSizesStr
 from bulma.utils import css_class_string
 
 register = template.Library()
-BULMA_COLUMN_COUNT = 1
 
 
 @register.simple_tag
@@ -35,7 +33,7 @@ def bulma_field(
     input_style: str = None,
     placeholder: str = None,
     control_css_class: str = None,
-    field_template: str = None,
+    field_template: str = "bulma/forms/fields.html",
 ):
     css_classes = {
         "label": css_class_string("sr-only" if inline else None),
@@ -54,19 +52,42 @@ def bulma_field(
         "icon_right": css_class_string(icon_right),
         "icon_right_size": css_class_string(f"is-{icon_right_size}"),
     }
-    return render_field(
-        field,
-        css_classes=css_classes,
-        field_template=field_template,
-        control_only=control_only,
-        is_horizontal=is_horizontal,
-        placeholder=placeholder,
-    )
+
+    widget_attrs = {
+        "class": css_classes.get("input", ""),
+    }
+    if placeholder:
+        widget_attrs.update({"placeholder": placeholder})
+
+    context = {
+        "field": field,
+        "widget_attrs": widget_attrs,
+        "css_classes": preprocess_markup_classes(css_classes, field),
+        "form": field.form,
+        "control_only": control_only,
+        "is_horizontal": is_horizontal,
+    }
+
+    return get_template(field_template).render(context)
 
 
 @register.simple_tag
 def bulma_form(form, is_horizontal=False):
-    return render_form(form, is_horizontal=is_horizontal)
+    has_management = getattr(form, "management_form", None)
+    if has_management:
+        template_name = "bulma/forms/formset.html"
+        context = {
+            "formset": form,
+            "is_horizontal": is_horizontal,
+        }
+    else:
+        template_name = "bulma/forms/form.html"
+        context = {
+            "form": form,
+            "is_horizontal": is_horizontal,
+        }
+
+    return get_template(template_name).render(context)
 
 
 @register.simple_tag
@@ -83,59 +104,6 @@ def font_awesome():
     return mark_safe(cdn_link)
 
 
-@register.filter(name="bulma")
-def bulma_deprecated(element):
-    markup_classes = {"label": "", "control": "", "single_value": ""}
-    return legacy_render(element, markup_classes=markup_classes, control_only=False)
-
-
-@register.filter(name="bulma_inline")
-def bulma_inline_deprecated(element):
-    markup_classes = {"label": "sr-only", "control": "", "single_value": ""}
-    return legacy_render(element, markup_classes=markup_classes, control_only=False)
-
-
-@register.filter(name="bulma_horizontal")
-def bulma_horizontal_deprecated(element, label_cols="is-2"):
-    markup_classes = {"label": label_cols, "control": "", "single_value": ""}
-
-    for cl in label_cols.split(" "):
-        splitted_class = cl.split("-")
-
-        try:
-            value_nb_cols = int(splitted_class[-1])
-        except ValueError:
-            value_nb_cols = BULMA_COLUMN_COUNT
-
-        if value_nb_cols >= BULMA_COLUMN_COUNT:
-            splitted_class[-1] = str(BULMA_COLUMN_COUNT)
-        else:
-            offset_class = cl.split("-")
-            offset_class[-1] = "offset-" + str(value_nb_cols)
-            splitted_class[-1] = str(BULMA_COLUMN_COUNT - value_nb_cols)
-            markup_classes["single_value"] += " " + "-".join(offset_class)
-            markup_classes["single_value"] += " " + "-".join(splitted_class)
-
-        markup_classes["value"] += " " + "-".join(splitted_class)
-
-    return legacy_render(element, markup_classes=markup_classes, control_only=False)
-
-
-@register.filter
-def add_input_classes(field, input_css_classes=None):
-    css_classes = field.field.widget.attrs.get("class", "")
-    if input_css_classes:
-        css_classes += f" {input_css_classes}"
-    if len(field.errors) > 0 and "is-danger" not in css_classes:
-        css_classes += " is-danger"
-    field.field.widget.attrs["class"] = css_classes
-
-
-def add_placeholder(field, placeholder):
-    # breakpoint()
-    field.field.widget.attrs["placeholder"] = placeholder
-
-
 def preprocess_markup_classes(markup_classes, bound_field):
     if any([is_file(bound_field), is_textarea(bound_field)]):
         markup_classes["control"] = markup_classes.get("control", "").replace(
@@ -146,100 +114,6 @@ def preprocess_markup_classes(markup_classes, bound_field):
         )
         markup_classes["control"] = markup_classes.get("control", "").strip()
     return markup_classes
-
-
-def render_form(form, **kwargs):
-    markup_classes = kwargs.pop("markup_classes", {})
-    is_horizontal = kwargs.pop("is_horizontal", False)
-    has_management = getattr(form, "management_form", None)
-    if has_management:
-        # for formset_member in form.forms:
-        #     for field in formset_member.visible_fields():
-        #         add_input_classes(field)
-
-        template_name = "bulma/forms/formset.html"
-        context = {
-            "formset": form,
-            "classes": markup_classes,
-            "is_horizontal": is_horizontal,
-        }
-    else:
-        # for field in form.visible_fields():
-        #     add_input_classes(field)
-
-        template_name = "bulma/forms/form.html"
-        context = {
-            "form": form,
-            "classes": markup_classes,
-            "is_horizontal": is_horizontal,
-        }
-
-    return get_template(template_name).render(context)
-
-
-def render_field(field, **kwargs):
-    context = {}
-    css_classes = kwargs.get("css_classes", {})
-    template_name = kwargs.get("field_template") or "bulma/forms/fields.html"
-    add_input_classes(field, css_classes.get("input", ""))
-    placeholder = kwargs.get("placeholder", {})
-    if placeholder:
-        add_placeholder(field, placeholder)
-    context.update(
-        {
-            "field": field,
-            "css_classes": preprocess_markup_classes(css_classes, field),
-            "form": field.form,
-            "control_only": kwargs.get("control_only", False),
-            "is_horizontal": kwargs.get("is_horizontal", False),
-        }
-    )
-    return get_template(template_name).render(context)
-
-
-def legacy_render(element, **kwargs):
-    markup_classes = kwargs.pop("markup_classes", {})
-    wrap_with_field = kwargs.pop("wrap_with_field", True)
-
-    template_name = kwargs.get("field_template") or "bulma/forms/fields.html"
-    if isinstance(element, BoundField):
-        add_input_classes(element, markup_classes.get("input", ""))
-        context = {
-            "field": element,
-            "css_classes": preprocess_markup_classes(markup_classes, element),
-            "form": element.form,
-            "control_only": not wrap_with_field,
-        }
-    else:
-        has_management = getattr(element, "management_form", None)
-        if has_management:
-            for form in element.forms:
-                for field in form.visible_fields():
-                    add_input_classes(field)
-
-            template_name = "bulma/forms/formset.html"
-            context = {
-                "formset": element,
-                "classes": markup_classes,
-                "wrap_with_field": wrap_with_field,
-            }
-        else:
-            for field in element.visible_fields():
-                add_input_classes(field)
-
-            template_name = "bulma/forms/form.html"
-            context = {
-                "form": element,
-                "classes": markup_classes,
-                "wrap_with_field": wrap_with_field,
-            }
-
-    return get_template(template_name).render(context)
-
-
-@register.filter
-def widget_type(field):
-    return field.field.widget
 
 
 @register.filter
@@ -291,20 +165,19 @@ def is_file(field):
     return isinstance(field.field.widget, forms.FileInput)
 
 
-@register.filter
-def addclass(field, css_class):
+@register.simple_tag
+def render_field_widget(field, attrs=None, css_class=None):
+    if attrs is None:
+        attrs = {}
+    if not attrs.get("class"):
+        attrs["class"] = ""
+    if css_class:
+        attrs["class"] += " " + css_class
     if len(field.errors) > 0:
-        css_class += " is-danger"
+        attrs["class"] += " is-danger"
     field_classes = field.field.widget.attrs.get("class", "")
-    field_classes += f" {css_class}"
-    return field.as_widget(attrs={"class": field_classes})
-
-
-@register.filter
-def attrs(field, attrs):
-    widget_attrs = field.field.widget.attrs or {}
-    field.field.widget.attrs = {**widget_attrs, **tokens_to_dict(attrs)}
-    return field
+    attrs["class"] += f" {field_classes}"
+    return field.as_widget(attrs=attrs)
 
 
 @register.filter
