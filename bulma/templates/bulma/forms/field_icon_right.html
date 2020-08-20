@@ -1,5 +1,5 @@
 {% if css_classes.icon_right %}
-  <span class="icon is-{{ icon_right_size }} is-right">
+  <span class="icon is-right{% if icon_right_container %} {{ icon_right_container }}{% endif %}">
       <i class="{{ css_classes.icon_right }}"></i>
     </span>
 {% endif %}

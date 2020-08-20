@@ -1,4 +1,4 @@
-{% extends "bulma/forms/field.html" %}
+{% extends "bulma/forms/field_without_icons.html" %}
 {% load bulma_tags %}
 
 {% block control %}
@@ -7,6 +7,3 @@
     {% render_field_widget field widget_attrs %} {{ field.label }}
   </label>
 {% endblock %}
-
-{% block icon_left %}{% endblock icon_left %}
-{% block icon_right %}{% endblock icon_right %}

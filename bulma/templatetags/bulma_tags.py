@@ -21,11 +21,13 @@ def bulma_field(
     inline: bool = False,
     control_only: bool = False,
     is_horizontal: bool = False,
-    field_label_size: str = "is-normal",
+    field_label_size: str = None,
     icon_left: str = None,
-    icon_left_size: str = "is-small",
+    icon_left_container: str = None,
+    icon_left_size: str = None,
     icon_right: str = None,
-    icon_right_size: str = "is-small",
+    icon_right_container: str = None,
+    icon_right_size: str = None,
     field_css_class: str = None,
     input_css_class: str = None,
     input_size: InputSizesStr = None,
@@ -33,8 +35,11 @@ def bulma_field(
     input_style: str = None,
     placeholder: str = None,
     control_css_class: str = None,
-    field_template: str = "bulma/forms/fields.html",
+    field_template: str = None,
 ):
+    if field_template is None:
+        field_template = get_field_template_by_widget_type(field.field.widget)
+
     css_classes = {
         "label": css_class_string("sr-only" if inline else None),
         "field_label_size": css_class_string(f"is-{field_label_size}"),
@@ -48,9 +53,13 @@ def bulma_field(
             input_css_class, input_size, input_state, input_style
         ),
         "icon_left": css_class_string(icon_left),
-        "icon_left_size": css_class_string(f"is-{icon_left_size}"),
+        "icon_left_container": css_class_string(
+            icon_left_container, f"is-{icon_left_size}" if icon_left_size else None
+        ),
         "icon_right": css_class_string(icon_right),
-        "icon_right_size": css_class_string(f"is-{icon_right_size}"),
+        "icon_right_container": css_class_string(
+            icon_right_container, f"is-{icon_right_size}" if icon_right_size else None
+        ),
     }
 
     widget_attrs = {
@@ -62,8 +71,8 @@ def bulma_field(
     context = {
         "field": field,
         "widget_attrs": widget_attrs,
-        "css_classes": preprocess_markup_classes(css_classes, field),
-        # "css_classes": css_classes,
+        # "css_classes": preprocess_markup_classes(css_classes, field),
+        "css_classes": css_classes,
         "form": field.form,
         "control_only": control_only,
         "is_horizontal": is_horizontal,
@@ -99,65 +108,95 @@ def font_awesome():
     return {"attrs": get_bulma_setting("fontawesome_link")}
 
 
-def preprocess_markup_classes(markup_classes, bound_field):
-    if any([is_file(bound_field), is_textarea(bound_field)]):
-        markup_classes["control"] = markup_classes.get("control", "").replace(
-            "has-icons-left", ""
-        )
-        markup_classes["control"] = markup_classes.get("control", "").replace(
-            "has-icons-right", ""
-        )
-        markup_classes["control"] = markup_classes.get("control", "").strip()
-    return markup_classes
+# def preprocess_markup_classes(markup_classes, bound_field):
+#     if any([is_file(bound_field), is_textarea(bound_field)]):
+#         markup_classes["control"] = markup_classes.get("control", "").replace(
+#             "has-icons-left", ""
+#         )
+#         markup_classes["control"] = markup_classes.get("control", "").replace(
+#             "has-icons-right", ""
+#         )
+#         markup_classes["control"] = markup_classes.get("control", "").strip()
+#     return markup_classes
 
 
-@register.filter
-def is_select(field):
-    return isinstance(field.field.widget, forms.Select)
-
-
-@register.filter
-def is_multiple_select(field):
-    return isinstance(field.field.widget, forms.SelectMultiple)
-
-
-@register.filter
-def is_textarea(field):
-    return isinstance(field.field.widget, forms.Textarea)
-
-
-@register.filter
-def is_input(field):
-    return isinstance(
-        field.field.widget,
+def get_field_template_by_widget_type(widget):
+    default_template_name = "bulma/forms/fields/other.html"
+    mapping = (
+        ((forms.SelectMultiple,), "bulma/forms/fields/multiple_select.html"),
+        ((forms.Select,), "bulma/forms/fields/select.html"),
+        ((forms.Textarea,), "bulma/forms/fields/textarea.html"),
         (
-            forms.TextInput,
-            forms.NumberInput,
-            forms.EmailInput,
-            forms.PasswordInput,
-            forms.URLInput,
+            (
+                forms.TextInput,
+                forms.NumberInput,
+                forms.EmailInput,
+                forms.PasswordInput,
+                forms.URLInput,
+            ),
+            "bulma/forms/fields/input.html",
         ),
+        ((forms.CheckboxSelectMultiple,), "bulma/forms/fields/multiple_checkbox.html"),
+        ((forms.CheckboxInput,), "bulma/forms/fields/checkbox.html"),
+        ((forms.RadioSelect,), "bulma/forms/fields/radio.html"),
+        ((forms.FileInput,), "bulma/forms/fields/file.html"),
     )
 
+    for widget_types, template_name in mapping:
+        if isinstance(widget, widget_types):
+            return template_name
 
-@register.filter
-def is_checkbox(field):
-    return isinstance(field.field.widget, forms.CheckboxInput)
-
-
-@register.filter
-def is_multiple_checkbox(field):
-    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
+    return default_template_name
 
 
-@register.filter
-def is_radio(field):
-    return isinstance(field.field.widget, forms.RadioSelect)
-
-
-@register.filter
-def is_file(field):
-    return isinstance(field.field.widget, forms.FileInput)
+#
+# @register.filter
+# def is_select(field):
+#     return isinstance(field.field.widget, forms.Select)
+#
+#
+# @register.filter
+# def is_multiple_select(field):
+#     return isinstance(field.field.widget, forms.SelectMultiple)
+#
+#
+# @register.filter
+# def is_textarea(field):
+#     return isinstance(field.field.widget, forms.Textarea)
+#
+#
+# @register.filter
+# def is_input(field):
+#     return isinstance(
+#         field.field.widget,
+#         (
+#             forms.TextInput,
+#             forms.NumberInput,
+#             forms.EmailInput,
+#             forms.PasswordInput,
+#             forms.URLInput,
+#         ),
+#     )
+#
+#
+# @register.filter
+# def is_checkbox(field):
+#     return isinstance(field.field.widget, forms.CheckboxInput)
+#
+#
+# @register.filter
+# def is_multiple_checkbox(field):
+#     return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
+#
+#
+# @register.filter
+# def is_radio(field):
+#     return isinstance(field.field.widget, forms.RadioSelect)
+#
+#
+# @register.filter
+# def is_file(field):
+#     return isinstance(field.field.widget, forms.FileInput)
 
 
 @register.simple_tag
@@ -239,3 +278,9 @@ def strip_quotes(text):
     if text.endswith('"'):
         text = text[:-1]
     return text
+
+
+@register.filter
+def replace_string(string, search_and_replace):
+    [search, replace] = search_and_replace.split(",")
+    return string.replace(search, replace)

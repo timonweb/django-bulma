@@ -1,12 +1,11 @@
-{% extends "bulma/forms/field.html" %}
+{% extends "bulma/forms/field_without_icons.html" %}
 {% load bulma_tags %}
-
 
 {% block control %}
 <label class="file-label">
   {% render_field_widget field widget_attrs "file-input" %}
   <span class="file-cta">
-    <span class="icon file-icon is-{{ icon_left_size }} is-left">
+    <span class="icon file-icon is-left{% if icon_left_container %} {{ icon_left_container }}{% endif %}">
       {% if css_classes.icon_left %}
         <i class="{{ css_classes.icon_left }}"></i>
       {% else %}
@@ -20,6 +19,3 @@
   </span>
 </label>
 {% endblock control %}
-
-{% block icon_left %}{% endblock icon_left %}
-{% block icon_right %}{% endblock icon_right %}

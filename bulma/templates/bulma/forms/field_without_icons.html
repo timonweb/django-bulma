@@ -1,0 +1,7 @@
+{% extends "bulma/forms/field.html" %}
+{% load bulma_tags %}
+
+{% block control_class %}{{ css_classes.control|replace_string:"has-icons-left,"|replace_string:"has-icons-right," }}{% endblock control_class %}
+
+{% block icon_left %}{% endblock icon_left %}
+{% block icon_right %}{% endblock icon_right %}

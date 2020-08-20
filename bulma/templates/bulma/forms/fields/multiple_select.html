@@ -2,7 +2,7 @@
 {% load bulma_tags %}
 
 {% block control %}
-  <span class="select{% if field.errors|length > 0 %} is-danger{% endif %}">
+  <span class="select is-multiple{% if field.errors|length > 0 %} is-danger{% endif %}">
     {% render_field_widget field widget_attrs %}
   </span>
 {% endblock control %}
