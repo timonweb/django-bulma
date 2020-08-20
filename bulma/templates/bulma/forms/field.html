@@ -10,7 +10,7 @@
   {% if is_horizontal %}
       <div class="field-body"><div class="field">
   {% endif %}
-  <div class="control {% block control_class %}{{ css_classes.control }}{% endblock control_class %}"
+  <div class="{% spaceless %}control {% block control_class %}{{ css_classes.control }}{% endblock control_class %}{% endspaceless %}"
        {% if field.auto_id %}id="{{ field.auto_id }}" {% endif %}>
     {% block control %}
     {{ field }}
