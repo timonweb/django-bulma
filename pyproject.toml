@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-bulma"
-version = "0.8.1"
+version = "0.8.2"
 description = "Bulma CSS Framework for Django projects"
 authors = ["Tim Kamanin <tim@timonweb.com>"]
 license = "MIT"
