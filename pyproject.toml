@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-bulma"
-version = "0.8.2"
+version = "0.8.3"
 description = "Bulma CSS Framework for Django projects"
 authors = ["Tim Kamanin <tim@timonweb.com>"]
 license = "MIT"
@@ -11,9 +11,9 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
     "Topic :: Utilities",
@@ -25,7 +25,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6"
+python = ">=3.7"
 django = ">=2.2"
 
 [tool.poetry.dev-dependencies]

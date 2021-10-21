@@ -1,6 +1,6 @@
 # A Bulma Theme for Django Projects
 
-![Django Bulma](https://raw.githubusercontent.com/timonweb/django-bulma/master/test_project/static/images/django-bulma-logo.png)
+![Django Bulma](https://raw.githubusercontent.com/timonweb/django-bulma/master/assets/django-bulma-logo.png)
 
 A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a modern CSS framework based on Flexbox.
 
