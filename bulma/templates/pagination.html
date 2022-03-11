@@ -18,7 +18,7 @@
 
   <ul class="pagination-list">
     {% for page in paginator.page_range %}
-      <li><a class="pagination-link{% ifequal page page_obj.number %} is-current{% endifequal %}"
+      <li><a class="pagination-link{% if page == page_obj.number %} is-current{% endif %}"
              href="?page={{ page|stringformat:"d" }}{{ getvars }}{{ hashtag }}">{{ page|stringformat:"d" }}</a></li>
     {% endfor %}
   </ul>
