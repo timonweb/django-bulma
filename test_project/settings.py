@@ -21,7 +21,12 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = "test_project.urls"
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "/tmp/db.sqlite3",
+    }
+}
 
 MIDDLEWARE = (
     "django.contrib.sessions.middleware.SessionMiddleware",
