@@ -11,9 +11,9 @@
   "devDependencies": {
     "autoprefixer": "^9.8.0",
     "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.14.1",
     "postcss-cli": "^7.1.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "sass": "^1.54.0"
   },
   "license": "MIT",
   "main": "style.sass",
@@ -24,7 +24,7 @@
     "build-autoprefix": "postcss --use autoprefixer --map false --output ../css/style.css ../css/style.css",
     "build-cleancss": "cleancss -o ../css/style.min.css ../css/style.css",
     "build-clean": "rimraf css",
-    "build-sass": "node-sass --output-style expanded --source-map true style.sass ../css/style.css",
+    "build-sass": "sass --style expanded style.sass ../css/style.css",
     "deploy": "npm run build",
     "start": "npm run build-sass -- --watch"
   }
