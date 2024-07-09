@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = 'showcase'
 urlpatterns = [
-    url(r'^list/$', views.PaginatedList.as_view(), name='paginated_list'),
-    url(r'^form/$', views.FormExampleView.as_view(), name='form'),
+    path('list/', views.PaginatedList.as_view(), name='paginated_list'),
+    path('form/', views.FormExampleView.as_view(), name='form'),
 ]
