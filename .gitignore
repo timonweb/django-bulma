@@ -140,6 +140,7 @@ Temporary Items
 demo/static/bulma
 bulma/tests/static
 demo/memory
+db.sqlite3
 
 node_modules
 
