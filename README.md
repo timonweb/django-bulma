@@ -87,3 +87,5 @@ A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a m
 If you have found a bug or if you have a request for additional functionality, please use the issue tracker on GitHub.
 
 [https://github.com/timonweb/django-bulma/issues](https://github.com/timonweb/django-bulma/issues)
+
+2017 - 2025 (c) [Tim Kamanin - A Full Stack Django and Wagtail Developer](https://timonweb.com)
