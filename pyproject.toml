@@ -1,6 +1,6 @@
 [project]
 name = "django-bulma"
-version = "0.10.0"
+version = "0.11.0"
 description = "Bulma CSS Framework for Django projects"
 authors = [{ name = "Tim Kamanin", email = "tim@timonweb.com" }]
 license = "MIT"
