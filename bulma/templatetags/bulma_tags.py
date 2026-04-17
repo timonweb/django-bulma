@@ -1,4 +1,3 @@
-import django
 from django import forms
 from django import template
 from django.forms import BoundField
@@ -139,11 +138,8 @@ def is_multiple_checkbox(field):
 
 @register.filter
 def is_radio(field):
-    if django.__version__ >= "4.0":
-        # CheckboxSelectMultiple inherits from RadioSelect in Django >= 4.0.
-        return isinstance(field.field.widget, forms.RadioSelect) and not is_multiple_checkbox(field)
-    else:
-        return isinstance(field.field.widget, forms.RadioSelect)
+    # CheckboxSelectMultiple inherits from RadioSelect in Django >= 4.0.
+    return isinstance(field.field.widget, forms.RadioSelect) and not is_multiple_checkbox(field)
 
 
 @register.filter
