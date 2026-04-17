@@ -3136,6 +3136,11 @@ table th {
   width: 0.625em;
 }
 
+.skeleton-block:not(:last-child), .media:not(:last-child), .level:not(:last-child), .fixed-grid:not(:last-child), .grid:not(:last-child), .tabs:not(:last-child), .pagination:not(:last-child), .message:not(:last-child), .card:not(:last-child), .breadcrumb:not(:last-child), .field:not(:last-child), .file:not(:last-child), .title:not(:last-child),
+.subtitle:not(:last-child), .tags:not(:last-child), .table:not(:last-child), .table-container:not(:last-child), .progress:not(:last-child), .notification:not(:last-child), .content:not(:last-child), .buttons:not(:last-child), .box:not(:last-child), .block:not(:last-child) {
+  margin-bottom: var(--bulma-block-spacing);
+}
+
 .pagination-previous,
 .pagination-next,
 .pagination-link,
@@ -3163,6 +3168,46 @@ table th {
   transition-duration: var(--bulma-duration);
   transition-property: background-color, border-color, box-shadow, color;
   vertical-align: top;
+}
+
+.pagination-previous:focus,
+.pagination-next:focus,
+.pagination-link:focus,
+.pagination-ellipsis:focus, .file-cta:focus,
+.file-name:focus, .select select:focus, .input:focus, .textarea:focus, .button:focus, .pagination-previous:focus-visible,
+.pagination-next:focus-visible,
+.pagination-link:focus-visible,
+.pagination-ellipsis:focus-visible, .file-cta:focus-visible,
+.file-name:focus-visible, .select select:focus-visible, .input:focus-visible, .textarea:focus-visible, .button:focus-visible, .pagination-previous:focus-within,
+.pagination-next:focus-within,
+.pagination-link:focus-within,
+.pagination-ellipsis:focus-within, .file-cta:focus-within,
+.file-name:focus-within, .select select:focus-within, .input:focus-within, .textarea:focus-within, .button:focus-within, .is-focused.pagination-previous,
+.is-focused.pagination-next,
+.is-focused.pagination-link,
+.is-focused.pagination-ellipsis, .is-focused.file-cta,
+.is-focused.file-name, .select select.is-focused, .is-focused.input, .is-focused.textarea, .is-focused.button, .pagination-previous:active,
+.pagination-next:active,
+.pagination-link:active,
+.pagination-ellipsis:active, .file-cta:active,
+.file-name:active, .select select:active, .input:active, .textarea:active, .button:active, .is-active.pagination-previous,
+.is-active.pagination-next,
+.is-active.pagination-link,
+.is-active.pagination-ellipsis, .is-active.file-cta,
+.is-active.file-name, .select select.is-active, .is-active.input, .is-active.textarea, .is-active.button {
+  outline: none;
+}
+
+[disabled].pagination-previous,
+[disabled].pagination-next,
+[disabled].pagination-link,
+[disabled].pagination-ellipsis, [disabled].file-cta,
+[disabled].file-name, .select select[disabled], [disabled].input, [disabled].textarea, [disabled].button, fieldset[disabled] .pagination-previous,
+fieldset[disabled] .pagination-next,
+fieldset[disabled] .pagination-link,
+fieldset[disabled] .pagination-ellipsis, fieldset[disabled] .file-cta,
+fieldset[disabled] .file-name, fieldset[disabled] .select select, .select fieldset[disabled] select, fieldset[disabled] .input, fieldset[disabled] .textarea, fieldset[disabled] .button {
+  cursor: not-allowed;
 }
 
 .modal-close {
@@ -3193,8 +3238,45 @@ table th {
   width: var(--bulma-delete-dimensions);
 }
 
+.modal-close::before, .modal-close::after {
+  background-color: var(--bulma-delete-color);
+  content: "";
+  display: block;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform-origin: center center;
+}
+
+.modal-close::before {
+  height: 2px;
+  width: 50%;
+}
+
+.modal-close::after {
+  height: 50%;
+  width: 2px;
+}
+
+.modal-close:hover, .modal-close:focus {
+  --bulma-delete-background-alpha: 0.4;
+}
+
 .modal-close:active {
   --bulma-delete-background-alpha: 0.5;
+}
+
+.is-small.modal-close {
+  --bulma-delete-dimensions: 1rem;
+}
+
+.is-medium.modal-close {
+  --bulma-delete-dimensions: 1.5rem;
+}
+
+.is-large.modal-close {
+  --bulma-delete-dimensions: 2rem;
 }
 
 .control.is-loading::after, .select.is-loading::after, .button.is-loading::after {
@@ -5805,6 +5887,58 @@ button.tag:active,
   border-color: var(--bulma-input-border-color);
   border-radius: var(--bulma-input-radius);
   color: hsl(var(--bulma-input-h), var(--bulma-input-s), var(--bulma-input-color-l));
+}
+
+.select select::-moz-placeholder, .input::-moz-placeholder, .textarea::-moz-placeholder {
+  color: var(--bulma-input-placeholder-color);
+}
+
+.select select::-webkit-input-placeholder, .input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder {
+  color: var(--bulma-input-placeholder-color);
+}
+
+.select select:-moz-placeholder, .input:-moz-placeholder, .textarea:-moz-placeholder {
+  color: var(--bulma-input-placeholder-color);
+}
+
+.select select:-ms-input-placeholder, .input:-ms-input-placeholder, .textarea:-ms-input-placeholder {
+  color: var(--bulma-input-placeholder-color);
+}
+
+.select select:hover, .input:hover, .textarea:hover, .select select.is-hovered, .is-hovered.input, .is-hovered.textarea {
+  --bulma-input-border-l-delta: var(--bulma-input-hover-border-l-delta);
+}
+
+.select select:active, .input:active, .textarea:active, .select select.is-active, .is-active.input, .is-active.textarea {
+  --bulma-input-border-l-delta: var(--bulma-input-active-border-l-delta);
+}
+
+.select select:focus, .input:focus, .textarea:focus, .select select:focus-within, .input:focus-within, .textarea:focus-within, .select select.is-focused, .is-focused.input, .is-focused.textarea {
+  border-color: hsl(var(--bulma-input-focus-h), var(--bulma-input-focus-s), var(--bulma-input-focus-l));
+  box-shadow: var(--bulma-input-focus-shadow-size) hsla(var(--bulma-input-focus-h), var(--bulma-input-focus-s), var(--bulma-input-focus-l), var(--bulma-input-focus-shadow-alpha));
+}
+
+.select select[disabled], [disabled].input, [disabled].textarea, fieldset[disabled] .select select, .select fieldset[disabled] select, fieldset[disabled] .input, fieldset[disabled] .textarea {
+  background-color: var(--bulma-input-disabled-background-color);
+  border-color: var(--bulma-input-disabled-border-color);
+  box-shadow: none;
+  color: var(--bulma-input-disabled-color);
+}
+
+.select select[disabled]::-moz-placeholder, [disabled].input::-moz-placeholder, [disabled].textarea::-moz-placeholder, fieldset[disabled] .select select::-moz-placeholder, .select fieldset[disabled] select::-moz-placeholder, fieldset[disabled] .input::-moz-placeholder, fieldset[disabled] .textarea::-moz-placeholder {
+  color: var(--bulma-input-disabled-placeholder-color);
+}
+
+.select select[disabled]::-webkit-input-placeholder, [disabled].input::-webkit-input-placeholder, [disabled].textarea::-webkit-input-placeholder, fieldset[disabled] .select select::-webkit-input-placeholder, .select fieldset[disabled] select::-webkit-input-placeholder, fieldset[disabled] .input::-webkit-input-placeholder, fieldset[disabled] .textarea::-webkit-input-placeholder {
+  color: var(--bulma-input-disabled-placeholder-color);
+}
+
+.select select[disabled]:-moz-placeholder, [disabled].input:-moz-placeholder, [disabled].textarea:-moz-placeholder, fieldset[disabled] .select select:-moz-placeholder, .select fieldset[disabled] select:-moz-placeholder, fieldset[disabled] .input:-moz-placeholder, fieldset[disabled] .textarea:-moz-placeholder {
+  color: var(--bulma-input-disabled-placeholder-color);
+}
+
+.select select[disabled]:-ms-input-placeholder, [disabled].input:-ms-input-placeholder, [disabled].textarea:-ms-input-placeholder, fieldset[disabled] .select select:-ms-input-placeholder, .select fieldset[disabled] select:-ms-input-placeholder, fieldset[disabled] .input:-ms-input-placeholder, fieldset[disabled] .textarea:-ms-input-placeholder {
+  color: var(--bulma-input-disabled-placeholder-color);
 }
 
 /* Bulma Form */
