@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.11.0] - 2026-04-17
+
+### Added
+- Django 6.0 support
+- Tox environment for Django 6.0
+
+### Changed
+- Migrated project tooling from Poetry to uv (PEP 621 `pyproject.toml`, `hatchling` build backend, `uv.lock`)
+- Bumped minimum Django to 4.2; dropped Django 3.2 from the test matrix
+- Cleaned up `is_radio` template filter — removed legacy `django.__version__` branch now that Django >= 4.0 is required
+
+### Removed
+- Python 3.9 trove classifier (already unsupported by `requires-python`)
+- `poetry.lock`
+
 ## [0.10.0] - 2024-12-30
 
 ### Changed
