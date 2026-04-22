@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.11.1] - 2026-04-22
+
+### Fixed
+- Replace removed `{% ifequal %}` tag in `pagination.html` with `{% if %}` for Django 4.0+ compatibility (thanks @ironworld, #98)
+
 ## [0.11.0] - 2026-04-17
 
 ### Added
