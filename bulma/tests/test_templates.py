@@ -1,5 +1,7 @@
+from django.core.paginator import Paginator
+
 from bulma.tests.forms import FormExample
-from bulma.tests.utils import render_template
+from bulma.tests.utils import get_dom, render_template
 
 
 def test_bulma_base_template():
@@ -38,3 +40,28 @@ def test_bulma_form_tag():
     )
 
     assert '<div class="field"' in output, "Fields are rendered"
+
+
+def test_pagination_highlights_only_current_page():
+    paginator = Paginator(range(1, 51), 10)  # 50 items, 5 pages
+    page_obj = paginator.get_page(3)
+
+    output = render_template(
+        "{% include 'pagination.html' %}",
+        context={
+            'is_paginated': True,
+            'paginator': paginator,
+            'page_obj': page_obj,
+            'getvars': '',
+            'hashtag': '',
+        }
+    )
+
+    dom = get_dom(output)
+    links = dom.select('a.pagination-link')
+
+    assert len(links) == 5, "Should render 5 page links"
+
+    current_links = [link for link in links if 'is-current' in link.get('class', [])]
+    assert len(current_links) == 1, "Only one page should be marked as current"
+    assert current_links[0].text.strip() == '3', "Page 3 should be the current page"
