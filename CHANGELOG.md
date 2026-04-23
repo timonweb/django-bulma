@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.11.2] - 2026-04-23
+
+### Fixed
+- Restore missing comparison expression in `pagination.html` `{% if %}` tag (thanks @ironworld, #99)
+
 ## [0.11.1] - 2026-04-22
 
 ### Fixed
